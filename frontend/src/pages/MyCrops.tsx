@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MobileContainer } from '../components/layout/MobileContainer';
+import { BottomNav } from '../components/layout/BottomNav';
 import {
     Menu,
     Languages,
@@ -8,8 +9,6 @@ import {
     Plus,
     Home,
     Sprout,
-    Store,
-    MessageSquareText,
     Droplets,
     Bug
 } from 'lucide-react';
@@ -22,7 +21,7 @@ const MyCrops = () => {
         {
             id: 1,
             name: "Rice (Basmati)",
-            image: "https://images.unsplash.com/photo-1536304993881-ff000997fb66?q=80&w=2070&auto=format&fit=crop",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Paddy_Fields_in_Tamil_Nadu_-_panoramio.jpg/1200px-Paddy_Fields_in_Tamil_Nadu_-_panoramio.jpg",
             status: "healthy",
             statusText: t('myCrops.healthy'),
             sownText: t('myCrops.sown', { count: 20 }),
@@ -36,7 +35,7 @@ const MyCrops = () => {
         {
             id: 2,
             name: "Wheat",
-            image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=2589&auto=format&fit=crop",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Vehn%C3%A4pelto_6.jpg/1200px-Vehn%C3%A4pelto_6.jpg",
             status: "warning",
             statusText: t('myCrops.warning'),
             sownText: t('myCrops.sown', { count: 45 }),
@@ -50,7 +49,7 @@ const MyCrops = () => {
         {
             id: 3,
             name: "Tomato",
-            image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?q=80&w=1587&auto=format&fit=crop",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/1200px-Tomato_je.jpg",
             status: "critical",
             statusText: t('myCrops.critical'),
             sownText: t('myCrops.sown', { count: 10 }),
@@ -138,28 +137,8 @@ const MyCrops = () => {
                 </div>
             </div>
 
-            {/* Bottom Navigation (Sticky) - Matching Dashboard for consistency but simpler */}
-            <div className="bg-white border-t border-gray-100 px-6 py-3 flex justify-between items-center fixed bottom-0 w-full max-w-[480px] z-50 text-gray-500">
-                <button
-                    onClick={() => navigate('/dashboard')}
-                    className="flex flex-col items-center gap-1 hover:text-green-600"
-                >
-                    <Home className="w-6 h-6" />
-                    <span className="text-[10px] font-medium">{t('dashboard.nav.home')}</span>
-                </button>
-                <button className="flex flex-col items-center gap-1 text-green-600">
-                    <Sprout className="w-6 h-6 fill-current" />
-                    <span className="text-[10px] font-bold">{t('dashboard.nav.myFarm')}</span>
-                </button>
-                <button className="flex flex-col items-center gap-1 hover:text-green-600">
-                    <Store className="w-6 h-6" />
-                    <span className="text-[10px] font-medium">Market</span>
-                </button>
-                <button className="flex flex-col items-center gap-1 hover:text-green-600">
-                    <MessageSquareText className="w-6 h-6" />
-                    <span className="text-[10px] font-medium">Expert</span>
-                </button>
-            </div>
+            {/* Bottom Navigation (Sticky) */}
+            <BottomNav />
 
         </MobileContainer>
     );

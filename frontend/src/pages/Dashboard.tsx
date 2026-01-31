@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MobileContainer } from '../components/layout/MobileContainer';
+import { BottomNav } from '../components/layout/BottomNav';
 import {
     Menu,
     Globe,
@@ -10,10 +11,7 @@ import {
     Tractor,
     CloudSun,
     IndianRupee,
-    Home,
     Sprout,
-    Users,
-    User,
     Check
 } from 'lucide-react';
 
@@ -180,28 +178,7 @@ const Dashboard = () => {
             </div>
 
             {/* Bottom Navigation */}
-            <div className="bg-white border-t border-gray-100 px-6 py-3 flex justify-between items-center fixed bottom-0 w-full max-w-[480px] z-50 text-gray-500">
-                <button className="flex flex-col items-center gap-1 text-green-600">
-                    <Home className="w-6 h-6 fill-current" />
-                    <span className="text-[10px] font-bold">{t('dashboard.nav.home')}</span>
-                </button>
-                <button
-                    onClick={() => navigate('/my-crops')}
-                    className="flex flex-col items-center gap-1 hover:text-green-600"
-                >
-                    <Sprout className="w-6 h-6" />
-                    <span className="text-[10px] font-medium">{t('dashboard.nav.myFarm')}</span>
-                </button>
-                <button className="flex flex-col items-center gap-1 hover:text-green-600">
-                    <Users className="w-6 h-6" />
-                    <span className="text-[10px] font-medium">{t('dashboard.nav.community')}</span>
-                </button>
-                <button className="flex flex-col items-center gap-1 hover:text-green-600">
-                    <User className="w-6 h-6" />
-                    <span className="text-[10px] font-medium">{t('dashboard.nav.profile')}</span>
-                </button>
-            </div>
-
+            <BottomNav />
         </MobileContainer>
     );
 };
