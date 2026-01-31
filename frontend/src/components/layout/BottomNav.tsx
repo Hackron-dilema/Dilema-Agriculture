@@ -30,10 +30,11 @@ export const BottomNav = () => {
                 </span>
             </button>
             <button
-                className="flex flex-col items-center gap-1 hover:text-green-600"
+                onClick={() => navigate('/community')}
+                className={`flex flex-col items-center gap-1 ${isActive('/community') ? 'text-green-600' : 'hover:text-green-600'}`}
             >
-                <Users className="w-6 h-6" />
-                <span className="text-[10px] font-medium">
+                <Users className={`w-6 h-6 ${isActive('/community') ? 'fill-current' : ''}`} />
+                <span className={`text-[10px] ${isActive('/community') ? 'font-bold' : 'font-medium'}`}>
                     {t('dashboard.nav.community')}
                 </span>
             </button>

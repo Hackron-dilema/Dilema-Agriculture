@@ -72,5 +72,68 @@
         "today": "আজ",
         "read": "পড়া হয়েছে",
         "inputPlaceholder": "পোকামাকড়, আবহাওয়া সম্পর্কে জিজ্ঞাসা করুন..."
+    },
+    "dashboard": {
+        "title": "কিষান সহায়ক",
+        "greeting": "নমস্তে, রাজেশ জি",
+        "askAi": "AI সহকারীকে জিজ্ঞাসা করুন",
+        "talkInLang": "আপনার ভাষায় কথা বলুন",
+        "tapToTalk": "কথা বলতে আলতো চাপুন",
+        "quickServices": "দ্রুত পরিষেবা",
+        "services": {
+            "cropHealth": "ফসলের স্বাস্থ্য",
+            "checkPests": "পোকামাকড় পরীক্ষা করুন",
+            "weather": "আবহাওয়া",
+            "weatherAlerts": "বৃষ্টি এবং ফসল কাটার সতর্কতা",
+            "mandiRates": "মান্ডির হার",
+            "marketPrices": "সর্বশেষ বাজার দর"
+        },
+        "expertTip": "বিশেষজ্ঞের পরামর্শ",
+        "tipTitle": "গম বপনের জন্য সেরা সময়",
+        "tipDesc": "এই সপ্তাহে তাপমাত্রা আদর্শ। সেরা ফলনের জন্য বুধবারের মধ্যে বপন শুরু করুন।",
+        "nav": {
+            "home": "হোম",
+            "myFarm": "আমার খামার",
+            "community": "সম্প্রদায়",
+            "profile": "প্রোফাইল"
+        }
+    },
+    "myCrops": {
+        "title": "আমার ফসল",
+        "healthy": "স্বাস্থ্যকর",
+        "warning": "সতর্কতা",
+        "critical": "গুরুত্বপূর্ণ",
+        "sown": "{{count}} দিন আগে বপন করা হয়েছে",
+        "sownSimple": "বপন {{date}}",
+        "seedling": "চারা",
+        "growthPhase": "বৃদ্ধির পর্যায়",
+        "maturing": "পরিপক্ক হচ্ছে",
+        "nextStep": "পরবর্তী পদক্ষেপ",
+        "addFertilizer": "সার প্রয়োগ করুন",
+        "waterNow": "এখন জল দিন",
+        "checkPests": "পোকামাকড় পরীক্ষা করুন",
+        "doItNow": "এখনই করুন",
+        "consultAi": "AI পরামর্শ নিন",
+        "rice": "চাল (বাসমতি)",
+        "wheat": "গম",
+        "tomato": "টমেটো"
+    },
+    "profile": {
+        "title": "আমার প্রোফাইল",
+        "language": "ভাষা",
+        "changeLanguage": "সব ভাষা দেখান",
+        "location": "অবস্থান",
+        "updateLocation": "অবস্থান আপডেট করুন",
+        "state": "রাজ্য",
+        "district": "জেলা",
+        "cropDetails": "ফসলের বিবরণ",
+        "sowingDate": "বপনের তারিখ",
+        "stage": "পর্যায়",
+        "landType": "জমির ধরন",
+        "dryLand": "শুকনো জমি",
+        "wetLand": "ভেজা জমি",
+        "notifications": "বিজ্ঞপ্তি",
+        "voiceAlerts": "ভয়েস অ্যালার্ট",
+        "startAgain": "আবার শুরু করুন"
     }
 }

@@ -72,5 +72,68 @@
         "today": "આજે",
         "read": "વંચાયેલ",
         "inputPlaceholder": "જીવાત, હવામાન વિશે પૂછો..."
+    },
+    "dashboard": {
+        "title": "કિસાન સહાયક",
+        "greeting": "નમસ્તે, રાજેશ જી",
+        "askAi": "AI સહાયકને પૂછો",
+        "talkInLang": "તમારી ભાષામાં વાત કરો",
+        "tapToTalk": "વાત કરવા માટે ટેપ કરો",
+        "quickServices": "ઝડપી સેવાઓ",
+        "services": {
+            "cropHealth": "પાક આરોગ્ય",
+            "checkPests": "જીવાત તપાસો",
+            "weather": "હવામાન",
+            "weatherAlerts": "વરસાદ અને કાપણી ચેતવણીઓ",
+            "mandiRates": "મંડી ભાવ",
+            "marketPrices": "નવીનતમ બજાર ભાવ"
+        },
+        "expertTip": "નિષ્ણાત સલાહ",
+        "tipTitle": "ઘઉંની વાવણી માટે શ્રેષ્ઠ સમય",
+        "tipDesc": "આ અઠવાડિયે તાપમાન આદર્શ છે. શ્રેષ્ઠ ઉત્પાદન માટે બુધવાર સુધી વાવણી શરૂ કરો.",
+        "nav": {
+            "home": "હોમ",
+            "myFarm": "મારું ખેતર",
+            "community": "સમુદાય",
+            "profile": "પ્રોફાઇલ"
+        }
+    },
+    "myCrops": {
+        "title": "મારા પાક",
+        "healthy": "સ્વસ્થ",
+        "warning": "ચેતવણી",
+        "critical": "ગંભીર",
+        "sown": "{{count}} દિવસ પહેલા વાવેલ",
+        "sownSimple": "વાવેતર {{date}}",
+        "seedling": "રોપાઓ",
+        "growthPhase": "વિકાસ તબક્કો",
+        "maturing": "પરિપક્વ થઈ રહ્યું છે",
+        "nextStep": "આગળનું પગલું",
+        "addFertilizer": "ખાતર નાખો",
+        "waterNow": "હવે પાણી આપો",
+        "checkPests": "જીવાત તપાસો",
+        "doItNow": "હમણાં કરો",
+        "consultAi": "AI સલાહ લો",
+        "rice": "ચોખા (બાસમતી)",
+        "wheat": "ઘઉં",
+        "tomato": "ટામેટાં"
+    },
+    "profile": {
+        "title": "મારી પ્રોફાઇલ",
+        "language": "ભાષા",
+        "changeLanguage": "બધી ભાષાઓ બતાવો",
+        "location": "સ્થાન",
+        "updateLocation": "સ્થાન અપડેટ કરો",
+        "state": "રાજ્ય",
+        "district": "જિલ્લો",
+        "cropDetails": "પાક વિગતો",
+        "sowingDate": "વાવણી તારીખ",
+        "stage": "તબક્કો",
+        "landType": "જમીનનો પ્રકાર",
+        "dryLand": "સૂકી જમીન",
+        "wetLand": "ભીની જમીન",
+        "notifications": "સૂચનાઓ",
+        "voiceAlerts": "વોઇસ ચેતવણીઓ",
+        "startAgain": "ફરીથી શરૂ કરો"
     }
 }

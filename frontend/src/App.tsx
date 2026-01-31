@@ -3,6 +3,7 @@ import LanguageSelection from './pages/LanguageSelection';
 import Dashboard from './pages/Dashboard';
 import MyCrops from './pages/MyCrops';
 import Profile from './pages/Profile';
+import Community from './pages/Community';
 import FarmInformation from './pages/FarmInformation';
 import CropTimeline from './pages/CropTimeline';
 import AdviceDetails from './pages/AdviceDetails';
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/my-crops" element={<MyCrops />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/community" element={<Community />} />
         <Route path="/farm-info" element={<FarmInformation />} />
         <Route path="/crop-timeline" element={<CropTimeline />} />
         <Route path="/advice-details" element={<AdviceDetails />} />

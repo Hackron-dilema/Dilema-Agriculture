@@ -72,5 +72,68 @@
         "today": "ਅੱਜ",
         "read": "ਪੜ੍ਹਿਆ",
         "inputPlaceholder": "ਕੀੜਿਆਂ, ਮੌਸਮ ਬਾਰੇ ਪੁੱਛੋ..."
+    },
+    "dashboard": {
+        "title": "ਕਿਸਾਨ ਸਹਾਇਕ",
+        "greeting": "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ, ਰਾਜੇਸ਼ ਜੀ",
+        "askAi": "AI ਸਹਾਇਕ ਨੂੰ ਪੁੱਛੋ",
+        "talkInLang": "ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਗੱਲ ਕਰੋ",
+        "tapToTalk": "ਗੱਲ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ",
+        "quickServices": "ਤੁਰੰਤ ਸੇਵਾਵਾਂ",
+        "services": {
+            "cropHealth": "ਫਸਲ ਦੀ ਸਿਹਤ",
+            "checkPests": "ਕੀੜਿਆਂ ਦੀ ਜਾਂਚ ਕਰੋ",
+            "weather": "ਮੌਸਮ",
+            "weatherAlerts": "ਮੀਂਹ ਅਤੇ ਕਟਾਈ ਅਲਰਟ",
+            "mandiRates": "ਮੰਡੀ ਦੇ ਭਾਅ",
+            "marketPrices": "ਤਾਜ਼ਾ ਬਜ਼ਾਰ ਕੀਮਤਾਂ"
+        },
+        "expertTip": "ਮਾਹਰ ਦੀ ਸਲਾਹ",
+        "tipTitle": "ਕਣਕ ਦੀ ਬਿਜਾਈ ਲਈ ਵਧੀਆ ਸਮਾਂ",
+        "tipDesc": "ਇਸ ਹਫ਼ਤੇ ਤਾਪਮਾਨ ਆਦਰਸ਼ ਹੈ। ਵਧੀਆ ਝਾੜ ਲਈ ਬੁੱਧਵਾਰ ਤੱਕ ਬਿਜਾਈ ਸ਼ੁਰੂ ਕਰੋ।",
+        "nav": {
+            "home": "ਘਰ",
+            "myFarm": "ਮੇਰਾ ਫਾਰਮ",
+            "community": "ਭਾਈਚਾਰਾ",
+            "profile": "ਪ੍ਰੋਫਾਈਲ"
+        }
+    },
+    "myCrops": {
+        "title": "ਮੇਰੀਆਂ ਫਸਲਾਂ",
+        "healthy": "ਸਿਹਤਮੰਦ",
+        "warning": "ਚੇਤਾਵਨੀ",
+        "critical": "ਨਾਜ਼ੁਕ",
+        "sown": "{{count}} ਦਿਨ ਪਹਿਲਾਂ ਬੀਜਿਆ",
+        "sownSimple": "ਬੀਜਿਆ {{date}}",
+        "seedling": "ਪਿਓਦ",
+        "growthPhase": "ਵਿਕਾਸ ਪੜਾਅ",
+        "maturing": "ਪੱਕ ਰਿਹਾ ਹੈ",
+        "nextStep": "ਅਗਲਾ ਕਦਮ",
+        "addFertilizer": "ਖਾਦ ਪਾਓ",
+        "waterNow": "ਹੁਣ ਪਾਣੀ ਦਿਓ",
+        "checkPests": "ਕੀੜਿਆਂ ਦੀ ਜਾਂਚ ਕਰੋ",
+        "doItNow": "ਹੁਣੇ ਕਰੋ",
+        "consultAi": "AI ਨਾਲ ਸਲਾਹ ਕਰੋ",
+        "rice": "ਚਾਵਲ (ਬਾਸਮਤੀ)",
+        "wheat": "ਕਣਕ",
+        "tomato": "ਟਮਾਟਰ"
+    },
+    "profile": {
+        "title": "ਮੇਰੀ ਪ੍ਰੋਫਾਈਲ",
+        "language": "ਭਾਸ਼ਾ",
+        "changeLanguage": "ਸਾਰੀਆਂ ਭਾਸ਼ਾਵਾਂ ਦਿਖਾਓ",
+        "location": "ਟਿਕਾਣਾ",
+        "updateLocation": "ਟਿਕਾਣਾ ਅਪਡੇਟ ਕਰੋ",
+        "state": "ਰਾਜ",
+        "district": "ਜ਼ਿਲ੍ਹਾ",
+        "cropDetails": "ਫਸਲ ਵੇਰਵੇ",
+        "sowingDate": "ਬਿਜਾਈ ਦੀ ਮਿਤੀ",
+        "stage": "ਪੜਾਅ",
+        "landType": "ਜ਼ਮੀਨ ਦੀ ਕਿਸਮ",
+        "dryLand": "ਖੁਸ਼ਕ ਜ਼ਮੀਨ",
+        "wetLand": "ਗਿੱਲੀ ਜ਼ਮੀਨ",
+        "notifications": "ਸੂਚਨਾਵਾਂ",
+        "voiceAlerts": "ਆਵਾਜ਼ ਅਲਰਟ",
+        "startAgain": "ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰੋ"
     }
 }

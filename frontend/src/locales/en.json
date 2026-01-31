@@ -138,5 +138,13 @@
         "notifications": "Notifications",
         "voiceAlerts": "Voice Alerts",
         "startAgain": "Start Again"
+    },
+    "community": {
+        "title": "Community",
+        "discussions": "Discussions",
+        "polls": "Polls",
+        "filter": "Filter Topics",
+        "share": "Share",
+        "votes": "votes"
     }
 }

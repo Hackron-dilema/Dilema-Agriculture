@@ -72,5 +72,68 @@
         "today": "आज",
         "read": "वाचले",
         "inputPlaceholder": "कीटक, हवामानाबद्दल विचारा..."
+    },
+    "dashboard": {
+        "title": "किसान सहायक",
+        "greeting": "नमस्ते, राजेश जी",
+        "askAi": "AI सहायकाला विचारा",
+        "talkInLang": "आपल्या भाषेत बोला",
+        "tapToTalk": "बोलण्यासाठी क्लिक करा",
+        "quickServices": "त्वरित सेवा",
+        "services": {
+            "cropHealth": "पीक आरोग्य",
+            "checkPests": "कीड तपासा",
+            "weather": "हवामान",
+            "weatherAlerts": "पाऊस आणि कापणी सूचना",
+            "mandiRates": "मंडी भाव",
+            "marketPrices": "नवीनतम बाजार भाव"
+        },
+        "expertTip": "तज्ञांचा सल्ला",
+        "tipTitle": "गहू पेरणीसाठी सर्वोत्तम वेळ",
+        "tipDesc": "या आठव्यात तापमान आदर्श आहे. उत्तम उत्पादनासाठी बुधवारपर्यंत पेरणी सुरू करा.",
+        "nav": {
+            "home": "होम",
+            "myFarm": "माझे शेत",
+            "community": "समुदाय",
+            "profile": "प्रोफाइल"
+        }
+    },
+    "myCrops": {
+        "title": "माझी पिके",
+        "healthy": "निरोगी",
+        "warning": "चेतावणी",
+        "critical": "गंभीर",
+        "sown": "{{count}} दिवसांपूर्वी पेरलेले",
+        "sownSimple": "पेरणी {{date}}",
+        "seedling": "रोपे",
+        "growthPhase": "वाढ टप्पा",
+        "maturing": "परिपक्व होत आहे",
+        "nextStep": "पुढील पायरी",
+        "addFertilizer": "खत द्या",
+        "waterNow": "आता पाणी द्या",
+        "checkPests": "कीड तपासा",
+        "doItNow": "आता करा",
+        "consultAi": "AI सल्ला घ्या",
+        "rice": "तांदूळ (बासमती)",
+        "wheat": "गहू",
+        "tomato": "टोमॅटो"
+    },
+    "profile": {
+        "title": "माझी प्रोफाइल",
+        "language": "भाषा",
+        "changeLanguage": "सर्व भाषा दर्शवा",
+        "location": "स्थान",
+        "updateLocation": "स्थान अपडेट करा",
+        "state": "राज्य",
+        "district": "जिल्हा",
+        "cropDetails": "पीक तपशील",
+        "sowingDate": "पेरणीची तारीख",
+        "stage": "टप्पा",
+        "landType": "जमिनीचा प्रकार",
+        "dryLand": "कोरडवाहू",
+        "wetLand": "ओलिताची जमीन",
+        "notifications": "सूचना",
+        "voiceAlerts": "व्हॉइस अलर्ट",
+        "startAgain": "पुन्हा सुरू करा"
     }
 }

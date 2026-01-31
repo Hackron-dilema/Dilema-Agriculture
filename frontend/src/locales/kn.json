@@ -72,5 +72,68 @@
         "today": "ಇಂದು",
         "read": "ಓದಲಾಗಿದೆ",
         "inputPlaceholder": "ಕೀಟಗಳು, ಹವಾಮಾನದ ಬಗ್ಗೆ ಕೇಳಿ..."
+    },
+    "dashboard": {
+        "title": "ಕೃಷಿ ಸಹಾಯಕ",
+        "greeting": "ನಮಸ್ತೆ, ರಾಜೇಶ್ ಜಿ",
+        "askAi": "AI ಸಹಾಯಕರನ್ನು ಕೇಳಿ",
+        "talkInLang": "ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡಿ",
+        "tapToTalk": "ಮಾತನಾಡಲು ಟ್ಯಾಪ್ ಮಾಡಿ",
+        "quickServices": "ತ್ವರಿತ ಸೇವೆಗಳು",
+        "services": {
+            "cropHealth": "ಬೆಳೆ ಆರೋಗ್ಯ",
+            "checkPests": "ಕೀಟಗಳನ್ನು ಪರಿಶೀಲಿಸಿ",
+            "weather": "ಹವಾಮಾನ",
+            "weatherAlerts": "ಮಳೆ ಮತ್ತು ಕಟಾವು ಎಚ್ಚರಿಕೆಗಳು",
+            "mandiRates": "ಮಾರುಕಟ್ಟೆ ದರಗಳು",
+            "marketPrices": "ಇತ್ತೀಚಿನ ಮಾರುಕಟ್ಟೆ ಬೆಲೆಗಳು"
+        },
+        "expertTip": "ತಜ್ಞರ ಸಲಹೆ",
+        "tipTitle": "ಗೋಧಿ ಬಿತ್ತನೆಗೆ ಉತ್ತಮ ಸಮಯ",
+        "tipDesc": "ಈ ವಾರ ತಾಪಮಾನ ಆದರ್ಶವಾಗಿದೆ. ಉತ್ತಮ ಇಳುವರಿಗಾಗಿ ಬುಧವಾರದೊಳಗೆ ಬಿತ್ತನೆ ಪ್ರಾರಂಭಿಸಿ.",
+        "nav": {
+            "home": "ಮುಖಪುಟ",
+            "myFarm": "ನನ್ನ ಕೃಷಿ",
+            "community": "ಸಮುದಾಯ",
+            "profile": "ಪ್ರೊಫೈಲ್"
+        }
+    },
+    "myCrops": {
+        "title": "ನನ್ನ ಬೆಳೆಗಳು",
+        "healthy": "ಆರೋಗ್ಯಕರ",
+        "warning": "ಎಚ್ಚರಿಕೆ",
+        "critical": "ಗಂಭೀರ",
+        "sown": "{{count}} ದಿನಗಳ ಹಿಂದೆ ಬಿತ್ತಲಾಗಿದೆ",
+        "sownSimple": "ಬಿತ್ತನೆ {{date}}",
+        "seedling": "ಸಸಿ",
+        "growthPhase": "ಬೆಳವಣಿಗೆಯ ಹಂತ",
+        "maturing": "ಪಕ್ವವಾಗುತ್ತಿದೆ",
+        "nextStep": "ಮುಂದಿನ ಹಂತ",
+        "addFertilizer": "ಗೊಬ್ಬರ ಹಾಕಿ",
+        "waterNow": "ಈಗ ನೀರು ಹಾಕಿ",
+        "checkPests": "ಕೀಟಗಳನ್ನು ಪರಿಶೀಲಿಸಿ",
+        "doItNow": "ಈಗಲೇ ಮಾಡಿ",
+        "consultAi": "AI ಸಲಹೆ ಪಡೆಯಿರಿ",
+        "rice": "ಅಕ್ಕಿ (ಬಾಸಮತಿ)",
+        "wheat": "ಗೋಧಿ",
+        "tomato": "ಟೊಮ್ಯಾಟೋ"
+    },
+    "profile": {
+        "title": "ನನ್ನ ಪ್ರೊಫೈಲ್",
+        "language": "ಭಾಷೆ",
+        "changeLanguage": "ಎಲ್ಲಾ ಭಾಷೆಗಳನ್ನು ತೋರಿಸಿ",
+        "location": "ಸ್ಥಳ",
+        "updateLocation": "ಸ್ಥಳ ನವೀಕರಿಸಿ",
+        "state": "ರಾಜ್ಯ",
+        "district": " ಜಿಲ್ಲೆ",
+        "cropDetails": "ಬೆಳೆ ವಿವರಗಳು",
+        "sowingDate": "ಬಿತ್ತನೆ ದಿನಾಂಕ",
+        "stage": "ಹಂತ",
+        "landType": "ಭೂಮಿಯ ಪ್ರಕಾರ",
+        "dryLand": "ಒಣ ಭೂಮಿ",
+        "wetLand": "ಒದ್ದೆ ಭೂಮಿ",
+        "notifications": "ಅಧಿಸೂಚನೆಗಳು",
+        "voiceAlerts": "ಧ್ವನಿ ಎಚ್ಚರಿಕೆಗಳು",
+        "startAgain": "ಮತ್ತೆ ಪ್ರಾರಂಭಿಸಿ"
     }
 }

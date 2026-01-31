@@ -138,5 +138,13 @@
         "notifications": "सूचनाएं",
         "voiceAlerts": "वॉयस अलर्ट",
         "startAgain": "फिर से शुरू करें"
+    },
+    "community": {
+        "title": "किसान चर्चा",
+        "discussions": "चर्चाएं",
+        "polls": "मतदान (Polls)",
+        "filter": "विषय चुनें",
+        "share": "शेयर करें",
+        "votes": "वोट"
     }
 }
