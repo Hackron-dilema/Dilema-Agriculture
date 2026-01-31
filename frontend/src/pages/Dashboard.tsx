@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MobileContainer } from '../components/layout/MobileContainer';
@@ -37,6 +37,31 @@ const Dashboard = () => {
         i18n.changeLanguage(code);
         setShowLangMenu(false);
     };
+
+    const [cropStatus, setCropStatus] = useState<any>(null);
+    const [farmerName, setFarmerName] = useState('Farmer');
+
+    useEffect(() => {
+        // Load farmer name
+        const name = localStorage.getItem('farmerName') || 'Farmer';
+        setFarmerName(name);
+
+        // Load crop status
+        const fetchStatus = async () => {
+            try {
+                const farmerId = parseInt(localStorage.getItem('farmerId') || '0');
+                if (farmerId) {
+                    const data = await import('../services/api').then(m => m.cropService.getCropStatus(farmerId));
+                    if (data.crops && data.crops.length > 0) {
+                        setCropStatus(data.crops[0]);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load crop status', error);
+            }
+        };
+        fetchStatus();
+    }, []);
 
     const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
 
@@ -91,7 +116,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold">{t('dashboard.greeting')}</h2>
+                        <h2 className="text-xl font-bold">{t('dashboard.greeting', { name: farmerName })}</h2>
                         <div className="flex items-center gap-1 text-green-600 text-sm font-medium">
                             <span className="w-2 h-2 bg-green-500 rounded-full inline-block"></span>
                             Sonipat, Haryana
@@ -138,8 +163,12 @@ const Dashboard = () => {
                             <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-3 text-green-600">
                                 <Tractor className="w-6 h-6" />
                             </div>
-                            <h4 className="font-bold">{t('dashboard.services.cropHealth')}</h4>
-                            <p className="text-xs text-green-600 mt-1">{t('dashboard.services.checkPests')}</p>
+                            <h4 className="font-bold">{cropStatus ? (cropStatus.crop_name || 'Crop Status') : t('dashboard.services.cropHealth')}</h4>
+                            <p className="text-xs text-green-600 mt-1">
+                                {cropStatus
+                                    ? `${(cropStatus.stage || '').replace('_', ' ')} • ${Math.round((cropStatus.overall_progress || 0) * 100)}%`
+                                    : t('dashboard.services.checkPests')}
+                            </p>
                         </div>
 
                         {/* Service 2 */}
@@ -159,8 +188,6 @@ const Dashboard = () => {
                             <h4 className="font-bold">{t('dashboard.services.mandiRates')}</h4>
                             <p className="text-xs text-orange-600 mt-1">{t('dashboard.services.marketPrices')}</p>
                         </div>
-
-                        {/* Service 4 - REMOVED */}
                     </div>
                 </div>
 

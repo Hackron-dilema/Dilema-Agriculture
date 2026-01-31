@@ -15,30 +15,48 @@ const ChatAssistant = () => {
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 1,
-            text: "Namaste! I can help you identify pests or diseases. Please upload a photo of your crop or ask me a question.",
-            sender: 'ai'
-        },
-        {
-            id: 2,
-            text: "My tomato leaves are turning yellow. What should I do?",
-            sender: 'user'
-        },
-        {
-            id: 3,
-            text: "I see. Please take a clear photo of the leaf using the camera button below so I can analyze it for you.",
+            text: "Hello! I am your AI farming assistant. How can I help you regarding your crops today?",
             sender: 'ai'
         }
     ]);
     const [inputValue, setInputValue] = useState("");
 
-    const handleSend = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSend = async () => {
         if (!inputValue.trim()) return;
-        setMessages([...messages, {
+
+        const userMsg: Message = {
             id: Date.now(),
             text: inputValue,
             sender: 'user'
-        }]);
+        };
+
+        setMessages(prev => [...prev, userMsg]);
         setInputValue("");
+        setIsLoading(true);
+
+        try {
+            const farmerId = parseInt(localStorage.getItem('farmerId') || '0');
+            const data = await import('../services/api').then(m => m.chatService.sendMessage(userMsg.text, farmerId));
+
+            const aiMsg: Message = {
+                id: Date.now() + 1,
+                text: data.response,
+                sender: 'ai'
+            };
+            setMessages(prev => [...prev, aiMsg]);
+        } catch (error) {
+            console.error('Chat error:', error);
+            const errorMsg: Message = {
+                id: Date.now() + 1,
+                text: "Sorry, I'm having trouble connecting right now. Please try again.",
+                sender: 'ai'
+            };
+            setMessages(prev => [...prev, errorMsg]);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -79,8 +97,8 @@ const ChatAssistant = () => {
 
                             {/* Message Bubble */}
                             <div className={`p-4 rounded-2xl max-w-[80%] shadow-sm ${msg.sender === 'user'
-                                    ? 'bg-[#22C522] text-black font-medium'
-                                    : 'bg-white text-gray-900 border border-gray-100'
+                                ? 'bg-[#22C522] text-black font-medium'
+                                : 'bg-white text-gray-900 border border-gray-100'
                                 }`}>
                                 <p className="leading-relaxed">{msg.text}</p>
                             </div>
@@ -109,6 +127,14 @@ const ChatAssistant = () => {
 
                     </div>
                 ))}
+
+                {isLoading && (
+                    <div className="flex gap-1 p-4 bg-gray-50 rounded-2xl w-fit">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+                    </div>
+                )}
 
                 {/* Helper Tip */}
                 <div className="bg-green-50 border border-green-100 rounded-xl p-4 flex items-center gap-3 mt-4">

@@ -100,7 +100,7 @@ const LanguageSelection = () => {
                         fullWidth
                         size="lg"
                         className="text-lg font-bold shadow-xl shadow-green-500/20"
-                        onClick={() => navigate('/dashboard')}
+                        onClick={() => navigate('/phone-login')}
                     >
                         {t('common.continue')} <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
