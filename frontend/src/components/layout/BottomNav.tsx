@@ -38,10 +38,11 @@ export const BottomNav = () => {
                 </span>
             </button>
             <button
-                className="flex flex-col items-center gap-1 hover:text-green-600"
+                onClick={() => navigate('/profile')}
+                className={`flex flex-col items-center gap-1 ${isActive('/profile') ? 'text-green-600' : 'hover:text-green-600'}`}
             >
-                <User className="w-6 h-6" />
-                <span className="text-[10px] font-medium">
+                <User className={`w-6 h-6 ${isActive('/profile') ? 'fill-current' : ''}`} />
+                <span className={`text-[10px] ${isActive('/profile') ? 'font-bold' : 'font-medium'}`}>
                     {t('dashboard.nav.profile')}
                 </span>
             </button>

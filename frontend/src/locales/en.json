@@ -116,6 +116,27 @@
         "waterNow": "Water Now",
         "checkPests": "Check Pests",
         "doItNow": "Do It Now",
-        "consultAi": "Consult AI"
+        "consultAi": "Consult AI",
+        "rice": "Rice (Basmati)",
+        "wheat": "Wheat",
+        "tomato": "Tomato"
+    },
+    "profile": {
+        "title": "My Profile",
+        "language": "Language",
+        "changeLanguage": "Show All Languages",
+        "location": "Location",
+        "updateLocation": "Update Location",
+        "state": "State",
+        "district": "District",
+        "cropDetails": "Crop Details",
+        "sowingDate": "Sowing Date",
+        "stage": "Stage",
+        "landType": "Land Type",
+        "dryLand": "Dry Land",
+        "wetLand": "Wet Land",
+        "notifications": "Notifications",
+        "voiceAlerts": "Voice Alerts",
+        "startAgain": "Start Again"
     }
 }

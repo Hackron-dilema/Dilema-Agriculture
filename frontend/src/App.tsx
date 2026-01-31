@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LanguageSelection from './pages/LanguageSelection';
 import Dashboard from './pages/Dashboard';
 import MyCrops from './pages/MyCrops';
+import Profile from './pages/Profile';
 import FarmInformation from './pages/FarmInformation';
 import CropTimeline from './pages/CropTimeline';
 import AdviceDetails from './pages/AdviceDetails';
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<LanguageSelection />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/my-crops" element={<MyCrops />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/farm-info" element={<FarmInformation />} />
         <Route path="/crop-timeline" element={<CropTimeline />} />
         <Route path="/advice-details" element={<AdviceDetails />} />
