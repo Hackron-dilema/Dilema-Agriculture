@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LanguageSelection from './pages/LanguageSelection';
+import PhoneLogin from './pages/PhoneLogin';
+import OTPVerification from './pages/OTPVerification';
 import Dashboard from './pages/Dashboard';
 import MyCrops from './pages/MyCrops';
 import Profile from './pages/Profile';
@@ -14,6 +16,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LanguageSelection />} />
+        <Route path="/phone-login" element={<PhoneLogin />} />
+        <Route path="/otp-verification" element={<OTPVerification />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/my-crops" element={<MyCrops />} />
         <Route path="/profile" element={<Profile />} />
