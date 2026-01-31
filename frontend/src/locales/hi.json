@@ -116,6 +116,27 @@
         "waterNow": "पानी दें",
         "checkPests": "कीटों की जांच करें",
         "doItNow": "अभी करें",
-        "consultAi": "एआई से पूछें"
+        "consultAi": "एआई से पूछें",
+        "rice": "चावल (बासमती)",
+        "wheat": "गेहूँ",
+        "tomato": "टमाटर"
+    },
+    "profile": {
+        "title": "मेरी प्रोफ़ाइल",
+        "language": "भाषा",
+        "changeLanguage": "सभी भाषाएं देखें",
+        "location": "स्थान",
+        "updateLocation": "स्थान अपडेट करें",
+        "state": "राज्य",
+        "district": "ज़िला",
+        "cropDetails": "फसल विवरण",
+        "sowingDate": "बुवाई की तारीख",
+        "stage": "चरण",
+        "landType": "भूमि का प्रकार",
+        "dryLand": "सूखी भूमि",
+        "wetLand": "गीली भूमि",
+        "notifications": "सूचनाएं",
+        "voiceAlerts": "वॉयस अलर्ट",
+        "startAgain": "फिर से शुरू करें"
     }
 }

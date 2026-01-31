@@ -26,7 +26,8 @@ export const useGeolocation = () => {
         error: null,
     });
 
-    useEffect(() => {
+    const getLocation = () => {
+        setState(prev => ({ ...prev, loading: true, error: null }));
         if (!navigator.geolocation) {
             setState(prev => ({ ...prev, loading: false, error: 'Geolocation not supported' }));
             return;
@@ -78,7 +79,11 @@ export const useGeolocation = () => {
                 setState(prev => ({ ...prev, loading: false, error: error.message }));
             }
         );
+    };
+
+    useEffect(() => {
+        getLocation();
     }, []);
 
-    return state;
+    return { ...state, getLocation };
 };

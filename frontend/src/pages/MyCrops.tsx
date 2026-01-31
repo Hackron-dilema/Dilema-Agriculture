@@ -7,8 +7,6 @@ import {
     Languages,
     User as UserIcon,
     Plus,
-    Home,
-    Sprout,
     Droplets,
     Bug
 } from 'lucide-react';
@@ -20,7 +18,7 @@ const MyCrops = () => {
     const crops = [
         {
             id: 1,
-            name: "Rice (Basmati)",
+            name: t('myCrops.rice'),
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Paddy_Fields_in_Tamil_Nadu_-_panoramio.jpg/1200px-Paddy_Fields_in_Tamil_Nadu_-_panoramio.jpg",
             status: "healthy",
             statusText: t('myCrops.healthy'),
@@ -34,7 +32,7 @@ const MyCrops = () => {
         },
         {
             id: 2,
-            name: "Wheat",
+            name: t('myCrops.wheat'),
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Vehn%C3%A4pelto_6.jpg/1200px-Vehn%C3%A4pelto_6.jpg",
             status: "warning",
             statusText: t('myCrops.warning'),
@@ -48,7 +46,7 @@ const MyCrops = () => {
         },
         {
             id: 3,
-            name: "Tomato",
+            name: t('myCrops.tomato'),
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/1200px-Tomato_je.jpg",
             status: "critical",
             statusText: t('myCrops.critical'),
