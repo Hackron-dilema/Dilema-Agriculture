@@ -1,0 +1,76 @@
+{
+    "common": {
+        "continue": "ਜਾਰੀ ਰੱਖੋ",
+        "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+        "back": "ਪਿੱਛੇ",
+        "online": "ਔਨਲਾਈਨ",
+        "dismiss": "ਰੱਦ ਕਰੋ"
+    },
+    "languageSelection": {
+        "title": "ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ",
+        "subtitle": "ਜਾਰੀ ਰੱਖਣ ਲਈ ਆਪਣੀ ਪਸੰਦੀਦਾ ਭਾਸ਼ਾ ਚੁਣੋ",
+        "default": "ਡਿਫੌਲਟ"
+    },
+    "farmInfo": {
+        "title": "ਫਾਰਮ ਜਾਣਕਾਰੀ",
+        "aiInsight": "AI ਜਾਣਕਾਰੀ",
+        "aiInsightText": "ਇਸ ਸੀਜ਼ਨ ਵਿੱਚ ਹੋਣ ਵਾਲੀ ਬਾਰਸ਼ ਲਈ ਤੁਹਾਡੀ ਬਿਜਾਈ ਦੀ ਮਿਤੀ ਬਿਲਕੁਲ ਸਹੀ ਹੈ।",
+        "location": "ਟਿਕਾਣਾ",
+        "activeGeofence": "ਸਰਗਰਮ",
+        "editLocation": "ਟਿਕਾਣਾ ਬਦਲੋ",
+        "farmDetails": "ਫਾਰਮ ਵੇਰਵੇ",
+        "totalLandSize": "ਕੁੱਲ ਜ਼ਮੀਨ",
+        "acres": "ਏਕੜ",
+        "currentCrop": "ਮੌਜੂਦਾ ਫਸਲ",
+        "lowWaterNeeds": "ਘੱਟ ਪਾਣੀ ਦੀ ਲੋੜ",
+        "sowingDate": "ਬਿਜਾਈ ਦੀ ਮਿਤੀ",
+        "harvestExpected": "ਕਟਾਈ ਦੀ ਉਮੀਦ: {{date}}",
+        "nextCropTimeline": "ਅੱਗੇ: ਫਸਲ ਸਮਾਂਰੇਖਾ"
+    },
+    "cropTimeline": {
+        "title": "ਫਸਲ ਸਮਾਂਰੇਖਾ",
+        "totalCycle": "ਕੁੱਲ ਚੱਕਰ",
+        "estHarvest": "ਅਨੁ. ਕਟਾਈ",
+        "daysOf": "ਦਿਨ {{current}} / {{total}}",
+        "complete": "{{percent}}% ਪੂਰਾ",
+        "lifecycleStages": "ਜੀਵਨ ਚੱਕਰ ਪੜਾਅ",
+        "stages": {
+            "sowing": "ਬਿਜਾਈ",
+            "sowingDetail": "{{date}} ਨੂੰ ਪੂਰਾ ਹੋਇਆ",
+            "vegetative": "ਵਨस्पति ਵਿਕਾਸ",
+            "vegetativeDetail": "ਤੇਜ਼ ਪੱਤਾ ਵਿਕਾਸ। ਨਾਈਟ੍ਰੋਜਨ ਪੱਧਰ ਯਕੀਨੀ ਬਣਾਓ।",
+            "flowering": "ਫੁੱਲ ਪੈਣਾ",
+            "floweringDetail": "ਉਮੀਦ: {{date}}",
+            "harvest": "ਕਟਾਈ",
+            "harvestDetail": "ਉਮੀਦ: {{date}}"
+        },
+        "current": "ਮੌਜੂਦਾ",
+        "aiRecommendations": "AI ਸਿਫ਼ਾਰਿਸ਼ਾਂ"
+    },
+    "adviceDetails": {
+        "title": "ਸਲਾਹ ਵੇਰਵੇ",
+        "mainQuestion": "ਅੱਜ ਖਾਦ ਕਿਉਂ ਪਾਈਏ?",
+        "aiConfidence": "AI ਵਿਸ਼ਵਾਸ",
+        "high": "ਉੱਚ",
+        "keyFactors": "ਮੁੱਖ ਕਾਰਕ",
+        "factors": {
+            "rain": "2-ਦਿਨ ਦੀ ਬਾਰਸ਼ ਤੇ ਅਧਾਰਤ",
+            "rainDesc": "ਹਲਕੀ ਬਾਰਸ਼ (5mm) ਮਦਦਗਾਰ ਹੈ",
+            "flowering": "ਫੁੱਲ ਪੈਣ ਦੇ ਪੜਾਅ ਤੇ ਅਧਾਰਤ",
+            "floweringDesc": "ਪੌਸ਼ਟਿਕ ਤੱਤਾਂ ਲਈ ਆਦਰਸ਼ ਸਮਾਂ",
+            "soil": "ਮਿੱਟੀ ਨਾਈਟ੍ਰੋਜਨ ਪੱਧਰ ਤੇ ਅਧਾਰਤ",
+            "soilDesc": "ਵਰਤਮਾਨ ਵਿੱਚ ਘੱਟ ਹੈ"
+        },
+        "modelTransparency": "ਮਾਡਲ ਪਾਰਦਰਸ਼ਤਾ",
+        "transparencyText": "ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ: AI ਮਾਡਲ ਸਹਾਇਕ ਹਨ, ਪਰ <1>ਤੁਸੀਂ ਆਪਣੀ ਜ਼ਮੀਨ ਨੂੰ ਸਭ ਤੋਂ ਵਧੀਆ ਜਾਣਦੇ ਹੋ।</1>",
+        "applyFertilizer": "ਖਾਦ ਪਾਓ"
+    },
+    "chat": {
+        "title": "ਖੇਤੀ ਸਹਾਇਕ",
+        "heavyRain": "ਭਾਰੀ ਬਾਰਸ਼ ਦੀ ਉਮੀਦ",
+        "heavyRainDesc": "ਕੱਲ੍ਹ 40mm।",
+        "today": "ਅੱਜ",
+        "read": "ਪੜ੍ਹਿਆ",
+        "inputPlaceholder": "ਕੀੜਿਆਂ, ਮੌਸਮ ਬਾਰੇ ਪੁੱਛੋ..."
+    }
+}

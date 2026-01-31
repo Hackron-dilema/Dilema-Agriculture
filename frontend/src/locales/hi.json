@@ -1,0 +1,79 @@
+{
+    "common": {
+        "continue": "जारी रखें",
+        "edit": "संपादित करें",
+        "back": "वापस",
+        "online": "ऑनलाइन",
+        "dismiss": "सलाह खारिज करें"
+    },
+    "languageSelection": {
+        "title": "अपनी भाषा चुनें",
+        "subtitle": "जारी रखने के लिए अपनी पसंदीदा भाषा चुनें",
+        "default": "डिफ़ॉल्ट"
+    },
+    "farmInfo": {
+        "title": "खेत की जानकारी",
+        "aiInsight": "एआई अंतर्दृष्टि",
+        "aiInsightText": "इस मौसम में अनुमानित वर्षा के लिए आपकी बुवाई की तारीख इष्टतम है।",
+        "location": "स्थान",
+        "activeGeofence": "सक्रिय जियोफेंस",
+        "editLocation": "स्थान संपादित करें",
+        "farmDetails": "खेत का विवरण",
+        "totalLandSize": "कुल भूमि का आकार",
+        "acres": "एकड़",
+        "currentCrop": "वर्तमान फसल",
+        "lowWaterNeeds": "कम पानी की आवश्यकता",
+        "sowingDate": "बुवाई की तारीख",
+        "harvestExpected": "कटाक की उम्मीद: {{date}}",
+        "nextCropTimeline": "अगला: फसल समयरेखा (डेमो)",
+        "detectingLocation": "स्थान का पता लगाया जा रहा है...",
+        "locationNotAvailable": "स्थान उपलब्ध नहीं है",
+        "usingDefault": "डिफ़ॉल्ट स्थान का उपयोग किया जा रहा है"
+    },
+    "cropTimeline": {
+        "title": "फसल समयरेखा",
+        "totalCycle": "कुल चक्र",
+        "estHarvest": "अनुमानित कटाई",
+        "daysOf": "दिन {{current}} / {{total}}",
+        "complete": "{{percent}}% पूर्ण",
+        "lifecycleStages": "जीवन चक्र चरण",
+        "stages": {
+            "sowing": "बुवाई",
+            "sowingDetail": "{{date}} को पूर्ण",
+            "vegetative": "वनस्पति विकास",
+            "vegetativeDetail": "तेजी से पत्ती का विकास। सुनिश्चित करें कि सक्रिय विकास के लिए नाइट्रोजन का स्तर पर्याप्त है।",
+            "flowering": "फूल आना",
+            "floweringDetail": "अपेक्षित: {{date}}",
+            "harvest": "कटाई",
+            "harvestDetail": "अपेक्षित: {{date}}"
+        },
+        "current": "वर्तमान",
+        "aiRecommendations": "एआई सिफारिशें"
+    },
+    "adviceDetails": {
+        "title": "सलाह विवरण",
+        "mainQuestion": "आज खाद क्यों डालें?",
+        "aiConfidence": "एआई आत्मविश्वास",
+        "high": "उच्च",
+        "keyFactors": "प्रमुख कारक",
+        "factors": {
+            "rain": "2-दिन के वर्षा पूर्वानुमान पर आधारित",
+            "rainDesc": "हल्की बारिश (5 मिमी) अवशोषण में सहायता करती है",
+            "flowering": "फूल आने के चरण पर आधारित",
+            "floweringDesc": "पोषक तत्व बढ़ाने के लिए आदर्श समय",
+            "soil": "मिट्टी के नाइट्रोजन स्तर पर आधारित",
+            "soilDesc": "वर्तमान में इष्टतम सीमा से नीचे"
+        },
+        "modelTransparency": "मॉडल पारदर्शिता",
+        "transparencyText": "कृपया ध्यान दें: एआई मॉडल सहायक उपकरण हैं, लेकिन <1>आप अपनी भूमि को सबसे बेहतर जानते हैं।</1> यह सलाह मौसम के पूर्वानुमान पर बहुत अधिक निर्भर है और बारिश में देरी होने पर बदल सकती है।",
+        "applyFertilizer": "खाद डालें"
+    },
+    "chat": {
+        "title": "कृषि सहायक",
+        "heavyRain": "भारी बारिश की उम्मीद",
+        "heavyRainDesc": "कल 40 मिमी। जल निकासी प्रणाली की जाँच करें।",
+        "today": "आज",
+        "read": "पढ़ा गया",
+        "inputPlaceholder": "कीटों, मौसम के बारे में पूछें..."
+    }
+}

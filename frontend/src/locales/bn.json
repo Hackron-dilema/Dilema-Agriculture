@@ -1,0 +1,76 @@
+{
+    "common": {
+        "continue": "চালিয়ে যান",
+        "edit": "সম্পাদনা করুন",
+        "back": "ফিরে যান",
+        "online": "অনলাইন",
+        "dismiss": "পরামর্শ বাতিল করুন"
+    },
+    "languageSelection": {
+        "title": "আপনার ভাষা নির্বাচন করুন",
+        "subtitle": "চালিয়ে যেতে আপনার পছন্দের ভাষা নির্বাচন করুন",
+        "default": "ডিফল্ট"
+    },
+    "farmInfo": {
+        "title": "খামারের তথ্য",
+        "aiInsight": "AI অন্তর্দৃষ্টি",
+        "aiInsightText": "এই মৌসুমে প্রত্যাশিত বৃষ্টিপাতের জন্য আপনার বপনের তারিখটি উপযুক্ত।",
+        "location": "অবস্থান",
+        "activeGeofence": "সক্রিয় জিওফেন্স",
+        "editLocation": "অবস্থান সম্পাদনা করুন",
+        "farmDetails": "খামারের বিবরণ",
+        "totalLandSize": "মোট জমির পরিমাণ",
+        "acres": "একর",
+        "currentCrop": "বর্তমান ফসল",
+        "lowWaterNeeds": "কম জলের প্রয়োজন",
+        "sowingDate": "বপনের তারিখ",
+        "harvestExpected": "প্রত্যাশিত ফসল কাটা: {{date}}",
+        "nextCropTimeline": "পরবর্তী: ফসলের সময়রেখা"
+    },
+    "cropTimeline": {
+        "title": "ফসলের সময়রেখা",
+        "totalCycle": "মোট চক্র",
+        "estHarvest": "আনুমানিক ফসল কাটা",
+        "daysOf": "দিন {{current}} / {{total}}",
+        "complete": "{{percent}}% সম্পূর্ণ",
+        "lifecycleStages": "জীবনচক্রের পর্যায়",
+        "stages": {
+            "sowing": "বপন",
+            "sowingDetail": "{{date}} তারিখে সম্পূর্ণ",
+            "vegetative": "উদ্ভিজ্জ বৃদ্ধি",
+            "vegetativeDetail": "দ্রুত পাতার বৃদ্ধি। সক্রিয় বৃদ্ধির জন্য নাইট্রোজেনের মাত্রা পর্যাপ্ত কিনা নিশ্চিত করুন।",
+            "flowering": "ফুল আসা",
+            "floweringDetail": "প্রত্যাশিত: {{date}}",
+            "harvest": "ফসল কাটা",
+            "harvestDetail": "প্রত্যাশিত: {{date}}"
+        },
+        "current": "বর্তমান",
+        "aiRecommendations": "AI সুপারিশ"
+    },
+    "adviceDetails": {
+        "title": "পরামর্শের বিবরণ",
+        "mainQuestion": "আজ কেন সার প্রয়োগ করবেন?",
+        "aiConfidence": "AI আত্মবিশ্বাস",
+        "high": "উচ্চ",
+        "keyFactors": "মূল কারণ",
+        "factors": {
+            "rain": "২ দিনের বৃষ্টির পূর্বাভাসের উপর ভিত্তি করে",
+            "rainDesc": "হালকা বৃষ্টি (৫ মিমি) শোষণে সহায়তা করে",
+            "flowering": "ফুল আসার পর্যায়ের উপর ভিত্তি করে",
+            "floweringDesc": "পুষ্টি বৃদ্ধির জন্য আদর্শ সময়",
+            "soil": "মাটির নাইট্রোজেনের মাত্রার উপর ভিত্তি করে",
+            "soilDesc": "বর্তমানে সর্বোত্তম সীমার নিচে"
+        },
+        "modelTransparency": "মডেল স্বচ্ছতা",
+        "transparencyText": "অনুগ্রহ করে মনে রাখবেন: AI মডেলগুলি সহায়ক সরঞ্জাম, কিন্তু <1>আপনি আপনার জমি সবচেয়ে ভালো জানেন।</1>",
+        "applyFertilizer": "সার প্রয়োগ করুন"
+    },
+    "chat": {
+        "title": "কৃষি সহকারী",
+        "heavyRain": "ভারী বৃষ্টির সম্ভাবনা",
+        "heavyRainDesc": "আগামীকাল ৪০ মিমি। ড্রেনেজ ব্যবস্থা পরীক্ষা করুন।",
+        "today": "আজ",
+        "read": "পড়া হয়েছে",
+        "inputPlaceholder": "পোকামাকড়, আবহাওয়া সম্পর্কে জিজ্ঞাসা করুন..."
+    }
+}

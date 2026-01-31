@@ -1,0 +1,79 @@
+{
+    "common": {
+        "continue": "Continue",
+        "edit": "Edit",
+        "back": "Back",
+        "online": "Online",
+        "dismiss": "Dismiss Advice"
+    },
+    "languageSelection": {
+        "title": "Choose your language",
+        "subtitle": "Select your preferred language to continue",
+        "default": "Default"
+    },
+    "farmInfo": {
+        "title": "Farm Information",
+        "aiInsight": "AI INSIGHT",
+        "aiInsightText": "Your sowing date is optimal for the predicted rainfall this season.",
+        "location": "Location",
+        "activeGeofence": "Active Geofence",
+        "editLocation": "Edit Location",
+        "farmDetails": "Farm Details",
+        "totalLandSize": "Total Land Size",
+        "acres": "Acres",
+        "currentCrop": "Current Crop",
+        "lowWaterNeeds": "Low water needs",
+        "sowingDate": "Sowing Date",
+        "harvestExpected": "Harvest expected: {{date}}",
+        "nextCropTimeline": "Next: Crop Timeline (Demo)",
+        "detectingLocation": "Detecting location...",
+        "locationNotAvailable": "Location not available",
+        "usingDefault": "Using default location"
+    },
+    "cropTimeline": {
+        "title": "Crop Timeline",
+        "totalCycle": "Total Cycle",
+        "estHarvest": "Est. Harvest",
+        "daysOf": "Day {{current}} of {{total}}",
+        "complete": "{{percent}}% Complete",
+        "lifecycleStages": "Lifecycle Stages",
+        "stages": {
+            "sowing": "Sowing",
+            "sowingDetail": "Completed on {{date}}",
+            "vegetative": "Vegetative Growth",
+            "vegetativeDetail": "Rapid leaf development. Ensure nitrogen levels are sufficient for active growth.",
+            "flowering": "Flowering",
+            "floweringDetail": "Expected: {{date}}",
+            "harvest": "Harvest",
+            "harvestDetail": "Expected: {{date}}"
+        },
+        "current": "Current",
+        "aiRecommendations": "AI Recommendations"
+    },
+    "adviceDetails": {
+        "title": "Advice Details",
+        "mainQuestion": "Why apply fertilizer today?",
+        "aiConfidence": "AI CONFIDENCE",
+        "high": "High",
+        "keyFactors": "KEY FACTORS",
+        "factors": {
+            "rain": "Based on 2-day rain forecast",
+            "rainDesc": "Light rain (5mm) aids absorption",
+            "flowering": "Based on flowering stage",
+            "floweringDesc": "Ideal timing for nutrient boost",
+            "soil": "Based on soil nitrogen levels",
+            "soilDesc": "Currently below optimal range"
+        },
+        "modelTransparency": "MODEL TRANSPARENCY",
+        "transparencyText": "Please note: AI models are helpful tools, but <1>you know your land best.</1> This advice is heavily dependent on the weather forecast and may change if the rain is delayed.",
+        "applyFertilizer": "Apply Fertilizer"
+    },
+    "chat": {
+        "title": "Farming Assistant",
+        "heavyRain": "Heavy Rain Expected",
+        "heavyRainDesc": "40mm tomorrow. Check drainage systems.",
+        "today": "Today",
+        "read": "Read",
+        "inputPlaceholder": "Ask about pests, weather..."
+    }
+}

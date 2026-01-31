@@ -1,0 +1,76 @@
+{
+    "common": {
+        "continue": "पुढे चला",
+        "edit": "संपादित करा",
+        "back": "मागे",
+        "online": "ऑनलाइन",
+        "dismiss": "सल्ला नको"
+    },
+    "languageSelection": {
+        "title": "आपली भाषा निवडा",
+        "subtitle": "पुढे जाण्यासाठी आपली पसंतीची भाषा निवडा",
+        "default": "डिफॉल्ट"
+    },
+    "farmInfo": {
+        "title": "शेत माहिती",
+        "aiInsight": "AI इनसाइट",
+        "aiInsightText": "या हंगामातील अंदाजित पावसासाठी आपली पेरणीची तारीख योग्य आहे.",
+        "location": "स्थान",
+        "activeGeofence": "सक्रिय जिओफेन्स",
+        "editLocation": "स्थान संपादित करा",
+        "farmDetails": "शेत तपशील",
+        "totalLandSize": "एकूण जमीन",
+        "acres": "एकर",
+        "currentCrop": "सध्याचे पीक",
+        "lowWaterNeeds": "कमी पाण्याची गरज",
+        "sowingDate": "पेरणीची तारीख",
+        "harvestExpected": "काढणी अपेक्षित: {{date}}",
+        "nextCropTimeline": "पुढे: पीक कालावधी"
+    },
+    "cropTimeline": {
+        "title": "पीक कालावधी",
+        "totalCycle": "एकूण चक्र",
+        "estHarvest": "काढणी अंदाज",
+        "daysOf": "दिवस {{current}} / {{total}}",
+        "complete": "{{percent}}% पूर्ण",
+        "lifecycleStages": "जीवनचक्र टप्पे",
+        "stages": {
+            "sowing": "पेरणी",
+            "sowingDetail": "{{date}} रोजी पूर्ण",
+            "vegetative": "शाकीय वाढ",
+            "vegetativeDetail": "पानांचा जलद विकास. सक्रिय वाढीसाठी नायट्रोजन स्तर पुरेसा असल्याची खात्री करा.",
+            "flowering": "फुलोरा",
+            "floweringDetail": "अपेक्षित: {{date}}",
+            "harvest": "काढणी",
+            "harvestDetail": "अपेक्षित: {{date}}"
+        },
+        "current": "सध्याचे",
+        "aiRecommendations": "AI शिफारसी"
+    },
+    "adviceDetails": {
+        "title": "सल्ला तपशील",
+        "mainQuestion": "आज खत का द्यावे?",
+        "aiConfidence": "AI आत्मविश्वास",
+        "high": "उच्च",
+        "keyFactors": "मुख्य घटक",
+        "factors": {
+            "rain": "2-दिवसांच्या पावसाच्या अंदाजावर आधारित",
+            "rainDesc": "हलका पाऊस (5 मिमी) शोषण्यास मदत करतो",
+            "flowering": "फुलोरा अवस्थेवर आधारित",
+            "floweringDesc": "पोषक तत्व वाढवण्यासाठी आदर्श वेळ",
+            "soil": "माती नायट्रोजन स्तरावर आधारित",
+            "soilDesc": "सध्या इष्टतम श्रेणीच्या खाली"
+        },
+        "modelTransparency": "मॉडेल पारदर्शकता",
+        "transparencyText": "कृपया लक्षात घ्या: AI मॉडेल उपयुक्त साधने आहेत, परंतु <1>आपली जमीन आपल्याला सर्वात चांगली माहित आहे.</1>",
+        "applyFertilizer": "खत द्या"
+    },
+    "chat": {
+        "title": "शेती सहाय्यक",
+        "heavyRain": "मुसळधार पावसाची अपेक्षा",
+        "heavyRainDesc": "उद्या 40 मिमी. निचरा प्रणाली तपासा.",
+        "today": "आज",
+        "read": "वाचले",
+        "inputPlaceholder": "कीटक, हवामानाबद्दल विचारा..."
+    }
+}

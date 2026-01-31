@@ -1,0 +1,76 @@
+{
+    "common": {
+        "continue": "தொடரவும்",
+        "edit": "திருத்து",
+        "back": "பின்",
+        "online": "ஆன்லைன்",
+        "dismiss": "நிராகரி"
+    },
+    "languageSelection": {
+        "title": "மொழியைத் தேர்ந்தெடுக்கவும்",
+        "subtitle": "தொடர உங்கள் விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்",
+        "default": "இயல்புநிலை"
+    },
+    "farmInfo": {
+        "title": "பண்ணை தகவல்",
+        "aiInsight": "AI நுண்ணறிவு",
+        "aiInsightText": "கணிக்கப்பட்ட மழைக்கு உங்கள் விதைப்பு தேதி சரியானது.",
+        "location": "இடம்",
+        "activeGeofence": "செயலில்",
+        "editLocation": "இடத்தைத் திருத்து",
+        "farmDetails": "பண்ணை விவரங்கள்",
+        "totalLandSize": "மொத்த நிலம்",
+        "acres": "ஏக்கர்",
+        "currentCrop": "தற்போதைய பயிர்",
+        "lowWaterNeeds": "குறைந்த நீர் தேவை",
+        "sowingDate": "விதைப்பு தேதி",
+        "harvestExpected": "அறுவடை: {{date}}",
+        "nextCropTimeline": "அடுத்து: பயிர் காலவரிசை"
+    },
+    "cropTimeline": {
+        "title": "பயிர் காலவரிசை",
+        "totalCycle": "மொத்த சுழற்சி",
+        "estHarvest": "அறுவடை",
+        "daysOf": "நாள் {{current}} / {{total}}",
+        "complete": "{{percent}}% முடிந்தது",
+        "lifecycleStages": "வாழ்க்கை நிலைகள்",
+        "stages": {
+            "sowing": "விதைப்பு",
+            "sowingDetail": "{{date}} இல் முடிந்தது",
+            "vegetative": "வளர்ச்சி",
+            "vegetativeDetail": "வேகமான வளர்ச்சி. நைட்ரஜன் அளவை உறுதிப்படுத்தவும்.",
+            "flowering": "பூக்கும்",
+            "floweringDetail": "எதிர்பார்க்கப்படுவது: {{date}}",
+            "harvest": "அறுவடை",
+            "harvestDetail": "எதிர்பார்க்கப்படுவது: {{date}}"
+        },
+        "current": "தற்போதைய",
+        "aiRecommendations": "AI பரிந்துரைகள்"
+    },
+    "adviceDetails": {
+        "title": "ஆலோசனை விவரங்கள்",
+        "mainQuestion": "இன்று உரம் இடுவது ஏன்?",
+        "aiConfidence": "AI நம்பிக்கை",
+        "high": "அதிகம்",
+        "keyFactors": "முக்கிய காரணிகள்",
+        "factors": {
+            "rain": "2 நாள் மழை முன்னறிவிப்பு",
+            "rainDesc": "லேசான மழை (5 மிமீ) நல்லது",
+            "flowering": "பூக்கும் நிலை அடிப்படையில்",
+            "floweringDesc": "ஊட்டச்சத்து அளிக்க சிறந்த நேரம்",
+            "soil": "மண் நைட்ரஜன் அடிப்படையில்",
+            "soilDesc": "தற்போது குறைவாக உள்ளது"
+        },
+        "modelTransparency": "வெளிப்படைத்தன்மை",
+        "transparencyText": "கவனிக்கவும்: AI ஒரு கருவி மட்டுமே, <1>உங்கள் நிலம் உங்களுக்குத் தெரியும்.</1>",
+        "applyFertilizer": "உரம் இடுங்கள்"
+    },
+    "chat": {
+        "title": "விவசாய உதவியாளர்",
+        "heavyRain": "கனமழை எதிர்பார்க்கப்படுகிறது",
+        "heavyRainDesc": "நாளை 40 மிமீ. வடிகால் பார்க்கவும்.",
+        "today": "இன்று",
+        "read": "படிக்கப்பட்டது",
+        "inputPlaceholder": "கேள்விகள் கேட்கவும்..."
+    }
+}
