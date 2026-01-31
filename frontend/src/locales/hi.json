@@ -75,5 +75,47 @@
         "today": "आज",
         "read": "पढ़ा गया",
         "inputPlaceholder": "कीटों, मौसम के बारे में पूछें..."
+    },
+    "dashboard": {
+        "title": "किसान सहायक",
+        "greeting": "नमस्ते, राजेश जी",
+        "askAi": "एआई सहायक से पूछें",
+        "talkInLang": "अपनी भाषा में बात करें",
+        "tapToTalk": "बोलने के लिए दबाएं",
+        "quickServices": "त्वरित सेवाएं",
+        "services": {
+            "cropHealth": "फसल स्वास्थ्य",
+            "checkPests": "कीटों की जांच करें",
+            "weather": "मौसम",
+            "weatherAlerts": "बारिश और कटाई अलर्ट",
+            "mandiRates": "मंडी भाव",
+            "marketPrices": "नवीनतम बाजार मूल्य"
+        },
+        "expertTip": "विशेषज्ञ सुझाव",
+        "tipTitle": "गेहूं की बुवाई का सर्वोत्तम समय",
+        "tipDesc": "इस सप्ताह तापमान आदर्श है। सर्वोत्तम उपज के लिए बुधवार तक बुवाई शुरू करें।",
+        "nav": {
+            "home": "होम",
+            "myFarm": "मेरा खेत",
+            "community": "समुदाय",
+            "profile": "प्रोफ़ाइल"
+        }
+    },
+    "myCrops": {
+        "title": "मेरी फसलें",
+        "healthy": "स्वस्थ",
+        "warning": "चेतावनी",
+        "critical": "नाजुक",
+        "sown": "{{count}} दिन पहले बुवाई",
+        "sownSimple": "बुवाई {{date}}",
+        "seedling": "अंकुरण",
+        "growthPhase": "विकास चरण",
+        "maturing": "परिपक्वता",
+        "nextStep": "अगला कदम",
+        "addFertilizer": "खाद डालें",
+        "waterNow": "पानी दें",
+        "checkPests": "कीटों की जांच करें",
+        "doItNow": "अभी करें",
+        "consultAi": "एआई से पूछें"
     }
 }
