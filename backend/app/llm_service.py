@@ -145,8 +145,16 @@ JSON response:"""
         
         if "weather" in decision_data:
             weather = decision_data["weather"]
-            current = weather.get("current", {})
-            context_parts.append(f"Current weather: {current.get('temperature', '--')}°C, {current.get('condition', 'unknown')}")
+            if "error" in weather:
+                context_parts.append(f"Weather info: Current temperature is unknown because the farmer's location is not set in their profile.")
+            else:
+                current = weather.get("current", {})
+                temp = current.get("temperature")
+                if temp is not None:
+                    context_parts.append(f"Current weather: {temp}°C, {current.get('condition', 'unknown')}")
+                else:
+                    context_parts.append(f"Current weather: Unknown (location may not be set)")
+            
             impact = weather.get("farming_impact", {})
             if impact:
                 context_parts.append(f"Farming impact: spray_safe={impact.get('spray_safe')}, irrigation_needed={impact.get('irrigation_needed')}")
@@ -167,21 +175,23 @@ JSON response:"""
         intent = decision_data.get("intent", "general_farming")
         context = "\n".join(context_parts)
         
-        prompt = f"""You are a helpful agricultural advisor speaking to a farmer.
+        prompt = f"""You are a friendly, helpful agricultural expert talking 1-on-1 with a farmer. 
 
-Farmer's name: {farmer_name or 'Farmer'}
+Farmer's name: {farmer_name or 'Friend'}
 Query intent: {intent}
 
-Data from analysis:
+Information from our analysis:
 {context}
 
-Generate a helpful, friendly response in {lang_name}.
-Keep it concise (2-4 sentences).
-Include specific advice based on the data.
-If there are alerts or risks, mention them.
-Use emoji sparingly for clarity (💧🌡️⚠️🌾).
+Guidelines:
+1. Speak naturally, like a person talking to a person.
+2. ONLY answer what is necessary and important based on the query.
+3. If weather data is missing, kindly remind the farmer to set their location in the profile.
+4. Do NOT use formal headers like "Best, Advisory Agent" or "Data Analysis".
+5. Keep it warm, concise (2-3 sentences), and practical.
+6. Use emoji naturally (💧 🌾).
 
-Response in {lang_name}:"""
+Your response in {lang_name}:"""
 
         try:
             response = await self._call_llm(prompt)

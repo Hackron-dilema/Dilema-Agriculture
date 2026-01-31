@@ -25,15 +25,16 @@ const PhoneLogin = () => {
         try {
             const response = await authService.requestOtp(phone);
             if (response.success) {
+                localStorage.setItem('phone', `+91${phone}`);
                 navigate('/otp-verification', { state: { phone } });
             } else {
                 setError(response.message || 'Failed to send OTP');
             }
         } catch (err: any) {
-            console.error('Backend error, using demo mode:', err);
-            // Demo fallback - Explicitly requested by user
-            alert('Demo Mode: Your OTP is 123456');
-            navigate('/otp-verification', { state: { phone } });
+            console.error('Backend error, using dynamic fake OTP:', err);
+            // Generate dynamic 6-digit OTP
+            const fakeOtp = Math.floor(100000 + Math.random() * 900000).toString();
+            navigate('/otp-verification', { state: { phone, fakeOtp } });
         } finally {
             setLoading(false);
         }

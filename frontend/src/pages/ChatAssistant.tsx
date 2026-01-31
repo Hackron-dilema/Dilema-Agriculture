@@ -1,30 +1,127 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { MobileContainer } from '../components/layout/MobileContainer';
-import { ChevronLeft, Languages, Volume2, Mic, Camera, Send, Lightbulb } from 'lucide-react';
+import { ChevronLeft, Languages, Volume2, Mic, Camera, Send, Lightbulb, Square } from 'lucide-react';
+import { chatService } from '../services/api';
+
 
 interface Message {
     id: number;
     text: string;
     sender: 'ai' | 'user';
+    reasoning?: string;
+    alerts?: string[];
+    confidence?: number;
+    data_sources?: string[];
     isAudio?: boolean;
 }
 
 const ChatAssistant = () => {
     const navigate = useNavigate();
+    const { t, i18n } = useTranslation();
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 1,
-            text: "Hello! I am your AI farming assistant. How can I help you regarding your crops today?",
+            text: t('chat.welcome', "Namaste! I am your AgriAI Assistant. How can I help you today?"),
             sender: 'ai'
         }
     ]);
     const [inputValue, setInputValue] = useState("");
-
     const [isLoading, setIsLoading] = useState(false);
+    const [isListening, setIsListening] = useState(false);
+    const recognitionRef = useRef<any>(null);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    // Load chat history on mount
+    useEffect(() => {
+        const loadHistory = async () => {
+            try {
+                const farmerId = localStorage.getItem('farmerId');
+                if (!farmerId) return;
+
+                const data = await chatService.getHistory(parseInt(farmerId));
+                if (data.messages && data.messages.length > 0) {
+                    const historyMessages: Message[] = data.messages.map((msg: any, index: number) => ({
+                        id: index + 1,
+                        text: msg.content,
+                        sender: msg.role === 'assistant' ? 'ai' : 'user'
+                    }));
+                    setMessages(historyMessages);
+                }
+            } catch (error) {
+                console.error('Failed to load chat history:', error);
+            }
+        };
+        loadHistory();
+    }, []);
+
+    // Scroll to bottom on new messages
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
+    // TTS Logic
+    const speakMessage = (text: string) => {
+        // Stop any ongoing speech
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // Map i18n language to BCP 47 tags for speech
+
+        const langMap: Record<string, string> = {
+            'en': 'en-IN',
+            'hi': 'hi-IN',
+            'pa': 'pa-IN',
+            'mr': 'mr-IN',
+            'ta': 'ta-IN',
+            'te': 'te-IN',
+            'kn': 'kn-IN',
+            'ml': 'ml-IN',
+            'gu': 'gu-IN',
+            'bn': 'bn-IN'
+        };
+
+        utterance.lang = langMap[i18n.language] || 'en-IN';
+        window.speechSynthesis.speak(utterance);
+    };
+
+    // STT Logic
+    const startListening = () => {
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Speech recognition not supported in this browser.");
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = i18n.language === 'en' ? 'en-IN' : (i18n.language === 'hi' ? 'hi-IN' : 'en-IN');
+
+        recognition.onstart = () => setIsListening(true);
+        recognition.onresult = (event: any) => {
+            const transcript = event.results[0][0].transcript;
+            setInputValue(transcript);
+            setIsListening(false);
+        };
+        recognition.onerror = () => setIsListening(false);
+        recognition.onend = () => setIsListening(false);
+
+        recognitionRef.current = recognition;
+        recognition.start();
+    };
+
+    const stopListening = () => {
+        if (recognitionRef.current) {
+            recognitionRef.current.stop();
+        }
+        setIsListening(false);
+    };
 
     const handleSend = async () => {
-        if (!inputValue.trim()) return;
+        if (!inputValue.trim() || isLoading) return;
 
         const userMsg: Message = {
             id: Date.now(),
@@ -37,20 +134,31 @@ const ChatAssistant = () => {
         setIsLoading(true);
 
         try {
-            const farmerId = parseInt(localStorage.getItem('farmerId') || '0');
-            const data = await import('../services/api').then(m => m.chatService.sendMessage(userMsg.text, farmerId));
+            const farmerIdStr = localStorage.getItem('farmerId');
+
+            if (!farmerIdStr) {
+                throw new Error("No farmer ID found. Please complete profile.");
+            }
+            const data = await chatService.sendMessage(userMsg.text, parseInt(farmerIdStr));
 
             const aiMsg: Message = {
                 id: Date.now() + 1,
                 text: data.response,
-                sender: 'ai'
+                sender: 'ai',
+                reasoning: data.reasoning,
+                alerts: data.alerts,
+                confidence: data.confidence,
+                data_sources: data.data_sources
             };
             setMessages(prev => [...prev, aiMsg]);
+
+            // Auto-speak AI response
+            speakMessage(data.response);
         } catch (error) {
             console.error('Chat error:', error);
             const errorMsg: Message = {
                 id: Date.now() + 1,
-                text: "Sorry, I'm having trouble connecting right now. Please try again.",
+                text: "I'm having trouble connecting right now. Please try again later.",
                 sender: 'ai'
             };
             setMessages(prev => [...prev, errorMsg]);
@@ -96,23 +204,73 @@ const ChatAssistant = () => {
                             </div>
 
                             {/* Message Bubble */}
-                            <div className={`p-4 rounded-2xl max-w-[80%] shadow-sm ${msg.sender === 'user'
-                                ? 'bg-[#22C522] text-black font-medium'
-                                : 'bg-white text-gray-900 border border-gray-100'
+                            <div className={`p-4 rounded-2xl max-w-[85%] shadow-sm ${msg.sender === 'user'
+                                ? 'bg-[#22C522] text-black font-semibold rounded-tr-none'
+                                : 'bg-white text-gray-900 border border-gray-100 rounded-tl-none'
                                 }`}>
-                                <p className="leading-relaxed">{msg.text}</p>
+                                <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.text}</p>
+
+                                {msg.sender === 'ai' && msg.confidence !== undefined && (
+                                    <div className="mt-2 flex items-center justify-between border-t border-gray-50 pt-2">
+                                        <div className="flex items-center gap-1.5">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                                                {t('chat.confidence', 'AI Confidence')}: {Math.round(msg.confidence * 100)}%
+                                            </span>
+                                        </div>
+                                        {msg.data_sources && msg.data_sources.length > 0 && (
+                                            <span className="text-[10px] font-medium text-gray-400">
+                                                via {msg.data_sources[0]}
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
 
-                        {/* Audio Player (Mock) for AI messages */}
+                        {/* AI Extra Context (Alerts & Reasoning) */}
+                        {msg.sender === 'ai' && (
+                            <div className="ml-12 mt-2 space-y-2 w-[85%]">
+                                {msg.alerts && msg.alerts.length > 0 && (
+                                    <div className="bg-amber-50 border border-amber-100 rounded-xl p-3 flex gap-3">
+                                        <div className="w-8 h-8 bg-amber-100 rounded-full flex-shrink-0 flex items-center justify-center text-amber-600">
+                                            <Lightbulb className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] font-bold text-amber-800 uppercase tracking-wider mb-0.5">{t('chat.alert', 'Farming Alert')}</p>
+                                            {msg.alerts.map((alert, idx) => (
+                                                <p key={idx} className="text-xs text-amber-700 font-medium">{alert}</p>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {msg.reasoning && (
+                                    <details className="bg-gray-50 border border-gray-100 rounded-xl overflow-hidden group">
+                                        <summary className="px-3 py-2 text-[10px] font-bold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 flex items-center justify-between list-none">
+                                            <span>{t('chat.why_this_advice', 'Why this advice?')}</span>
+                                            <ChevronLeft className="w-3 h-3 -rotate-90 group-open:rotate-90 transition-transform" />
+                                        </summary>
+                                        <div className="px-3 pb-3 text-xs text-gray-600 leading-relaxed border-t border-gray-100 pt-2">
+                                            {msg.reasoning}
+                                        </div>
+                                    </details>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Audio Player for AI messages */}
                         {msg.sender === 'ai' && (
                             <div className="ml-12 mt-1 bg-white border border-gray-100 rounded-xl p-2 flex items-center justify-between w-[80%] shadow-sm">
                                 <div className="flex items-center gap-2 text-green-600">
                                     <Volume2 className="w-5 h-5" />
-                                    <span className="text-sm font-medium">Listen to message</span>
+                                    <span className="text-sm font-medium">{t('chat.listen', 'Listen to message')}</span>
                                 </div>
-                                <button className="bg-[#22C522] text-black text-xs font-bold px-4 py-1.5 rounded-full hover:bg-green-500">
-                                    PLAY
+                                <button
+                                    onClick={() => speakMessage(msg.text)}
+                                    className="bg-[#22C522] text-black text-xs font-bold px-4 py-1.5 rounded-full hover:bg-green-500 active:scale-95 transition-transform"
+                                >
+                                    {t('chat.play', 'PLAY')}
                                 </button>
                             </div>
                         )}
@@ -127,14 +285,6 @@ const ChatAssistant = () => {
 
                     </div>
                 ))}
-
-                {isLoading && (
-                    <div className="flex gap-1 p-4 bg-gray-50 rounded-2xl w-fit">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
-                    </div>
-                )}
 
                 {/* Helper Tip */}
                 <div className="bg-green-50 border border-green-100 rounded-xl p-4 flex items-center gap-3 mt-4">
@@ -151,29 +301,38 @@ const ChatAssistant = () => {
                 </button>
 
                 {/* Text Input */}
-                <div className="flex-1 bg-gray-100 rounded-full h-12 flex items-center px-4 relative">
+                <div className={`flex-1 ${isListening ? 'bg-green-100' : 'bg-gray-100'} rounded-full h-12 flex items-center px-4 relative transition-colors`}>
                     <input
                         type="text"
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
-                        placeholder="Type or use voice..."
+                        placeholder={isListening ? "Listening..." : "Type or use voice..."}
                         className="bg-transparent w-full h-full outline-none text-gray-700 placeholder-gray-500 font-medium"
                         onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                     />
-                    <button className="text-gray-400 hover:text-gray-600">
-                        <Mic className="w-5 h-5" />
+                    <button
+                        onClick={isListening ? stopListening : startListening}
+                        className={`${isListening ? 'text-red-500 animate-pulse' : 'text-gray-400 hover:text-gray-600'}`}
+                    >
+                        {isListening ? <Square className="w-5 h-5 fill-current" /> : <Mic className="w-5 h-5" />}
                     </button>
+                    {isListening && (
+                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg">
+                            ACTIVE
+                        </div>
+                    )}
                 </div>
 
                 {/* Send Button */}
                 <button
                     onClick={handleSend}
-                    className="w-12 h-12 rounded-full bg-[#1a1c1a] flex items-center justify-center text-white shadow-lg active:scale-95 transition-transform"
+                    disabled={isLoading || !inputValue.trim()}
+                    className="w-12 h-12 rounded-full bg-[#1a1c1a] flex items-center justify-center text-white shadow-lg active:scale-95 transition-transform disabled:opacity-50"
                 >
                     <Send className="w-5 h-5 ml-0.5" />
                 </button>
             </div>
-
+            <div ref={messagesEndRef} />
         </MobileContainer>
     );
 };

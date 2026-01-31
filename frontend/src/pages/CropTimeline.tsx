@@ -1,20 +1,55 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MobileContainer } from '../components/layout/MobileContainer';
 import { Header } from '../components/common/Header';
 import { Button } from '../components/common/Button';
-import { MoreVertical, Check, Sparkles, Sprout, Tractor, Settings2 } from 'lucide-react';
+import { MoreVertical, Check, Sparkles, Sprout, Tractor, Settings2, Loader2 } from 'lucide-react';
 import { cn } from '../utils/cn';
+import { cropService } from '../services/api';
 
 const CropTimeline = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const [cropData, setCropData] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchCropData = async () => {
+            try {
+                const farmerId = localStorage.getItem('farmerId');
+                if (!farmerId) {
+                    setLoading(false);
+                    return;
+                }
+                const data = await cropService.getCropStatus(parseInt(farmerId));
+                if (data.crops && data.crops.length > 0) {
+                    setCropData(data.crops[0]);
+                }
+            } catch (error) {
+                console.error('Failed to fetch crop data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCropData();
+    }, []);
+
+    const getStageStatus = (stageName: string, currentStage: string) => {
+        const stageOrder = ['germination', 'vegetative', 'flowering', 'maturity', 'harvest'];
+        const currentIndex = stageOrder.indexOf(currentStage.toLowerCase());
+        const stageIndex = stageOrder.indexOf(stageName.toLowerCase());
+
+        if (stageIndex < currentIndex) return 'completed';
+        if (stageIndex === currentIndex) return 'current';
+        return 'upcoming';
+    };
 
     const stages = [
         {
             id: 1,
             title: t('cropTimeline.stages.sowing'),
-            detail: t('cropTimeline.stages.sowingDetail', { date: 'Oct 12' }),
+            detail: cropData ? t('cropTimeline.stages.sowingDetail', { date: new Date(cropData.sowing_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }) : '',
             status: 'completed',
             Icon: Check,
         },
@@ -22,21 +57,21 @@ const CropTimeline = () => {
             id: 2,
             title: t('cropTimeline.stages.vegetative'),
             detail: t('cropTimeline.stages.vegetativeDetail'),
-            status: 'current',
+            status: cropData ? getStageStatus('vegetative', cropData.stage) : 'upcoming',
             Icon: Sprout,
         },
         {
             id: 3,
             title: t('cropTimeline.stages.flowering'),
-            detail: t('cropTimeline.stages.floweringDetail', { date: 'Nov 20' }),
-            status: 'upcoming',
+            detail: t('cropTimeline.stages.floweringDetail', { date: 'TBD' }),
+            status: cropData ? getStageStatus('flowering', cropData.stage) : 'upcoming',
             Icon: Settings2,
         },
         {
             id: 4,
             title: t('cropTimeline.stages.harvest'),
-            detail: t('cropTimeline.stages.harvestDetail', { date: 'Dec 15' }),
-            status: 'upcoming',
+            detail: t('cropTimeline.stages.harvestDetail', { date: 'TBD' }),
+            status: cropData ? getStageStatus('harvest', cropData.stage) : 'upcoming',
             Icon: Tractor,
         },
     ];
@@ -51,46 +86,54 @@ const CropTimeline = () => {
             <div className="flex-1 overflow-y-auto pb-20">
                 <div className="px-4 pt-2 pb-6">
                     {/* Main Crop Card */}
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-lg shadow-gray-200/50 mb-8 border border-gray-100">
-                        <div className="h-48 relative bg-gray-200">
-                            <img
-                                src="https://images.unsplash.com/photo-1535242208474-9a2793260ca8?q=80&w=2564&auto=format&fit=crop"
-                                alt="Winter Wheat"
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                    e.currentTarget.style.display = 'none';
-                                    e.currentTarget.parentElement!.style.backgroundColor = '#166534'; // Dark green
-                                }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                            <div className="absolute bottom-4 left-5 text-white">
-                                <h2 className="text-2xl font-bold mb-0.5">Winter Wheat</h2>
-                                <p className="text-sm font-medium opacity-90">Field 4 • 2.5 Hectares</p>
-                            </div>
+                    {loading && (
+                        <div className="flex items-center justify-center py-12">
+                            <Loader2 className="w-8 h-8 animate-spin text-green-600" />
                         </div>
-                        <div className="p-5">
-                            <div className="flex justify-between items-start mb-1">
-                                <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">{t('cropTimeline.totalCycle')}</span>
-                                <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">{t('cropTimeline.estHarvest')}</span>
-                            </div>
-                            <div className="flex justify-between items-baseline mb-4">
-                                <div className="text-2xl font-bold text-gray-900">
-                                    {t('cropTimeline.daysOf', { current: 45, total: 120 }).split(' ').map((word, i) => (
-                                        i === 0 ? word + ' ' : <span key={i} className="text-lg text-gray-400 font-medium">{word} </span>
-                                    ))}
-                                </div>
-                                <div className="text-xl font-bold text-gray-900">Nov 20</div>
-                            </div>
+                    )}
 
-                            <div className="flex justify-between items-center text-sm font-bold text-[#22C522] mb-1.5">
-                                <span>{t('cropTimeline.complete', { percent: 35 })}</span>
+                    {!loading && cropData && (
+                        <div className="bg-white rounded-3xl overflow-hidden shadow-lg shadow-gray-200/50 mb-8 border border-gray-100">
+                            <div className="h-48 relative bg-gray-200">
+                                <img
+                                    src="https://images.unsplash.com/photo-1535242208474-9a2793260ca8?q=80&w=2564&auto=format&fit=crop"
+                                    alt={cropData.crop_name || cropData.crop_type}
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => {
+                                        e.currentTarget.style.display = 'none';
+                                        e.currentTarget.parentElement!.style.backgroundColor = '#166534';
+                                    }}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                                <div className="absolute bottom-4 left-5 text-white">
+                                    <h2 className="text-2xl font-bold mb-0.5 capitalize">{cropData.crop_name || cropData.crop_type}</h2>
+                                    <p className="text-sm font-medium opacity-90">Day {cropData.days_since_sowing}</p>
+                                </div>
                             </div>
-                            {/* Progress Bar */}
-                            <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-                                <div className="h-full bg-[#22C522] w-[35%] rounded-full shadow-[0_0_10px_rgba(34,197,34,0.5)]"></div>
+                            <div className="p-5">
+                                <div className="flex justify-between items-start mb-1">
+                                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">{t('cropTimeline.totalCycle')}</span>
+                                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">{t('cropTimeline.estHarvest')}</span>
+                                </div>
+                                <div className="flex justify-between items-baseline mb-4">
+                                    <div className="text-2xl font-bold text-gray-900">
+                                        {t('cropTimeline.daysOf', { current: cropData.days_since_sowing, total: 120 }).split(' ').map((word, i) => (
+                                            i === 0 ? word + ' ' : <span key={i} className="text-lg text-gray-400 font-medium">{word} </span>
+                                        ))}
+                                    </div>
+                                    <div className="text-xl font-bold text-gray-900">TBD</div>
+                                </div>
+
+                                <div className="flex justify-between items-center text-sm font-bold text-[#22C522] mb-1.5">
+                                    <span>{t('cropTimeline.complete', { percent: Math.round(cropData.overall_progress * 100) })}</span>
+                                </div>
+                                {/* Progress Bar */}
+                                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                    <div className="h-full bg-[#22C522] rounded-full shadow-[0_0_10px_rgba(34,197,34,0.5)]" style={{ width: `${cropData.overall_progress * 100}%` }}></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
 
                     {/* Lifecycle Stages */}
                     <h3 className="text-xl font-bold text-gray-900 mb-6">{t('cropTimeline.lifecycleStages')}</h3>
