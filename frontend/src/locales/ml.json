@@ -1,0 +1,76 @@
+{
+    "common": {
+        "continue": "തുടരുക",
+        "edit": "എഡിറ്റ്",
+        "back": "തിരികെ",
+        "online": "ഓൺലൈൻ",
+        "dismiss": "നിരസിക്കുക"
+    },
+    "languageSelection": {
+        "title": "ഭാഷ തിരഞ്ഞെടുക്കുക",
+        "subtitle": "തുടരാൻ നിങ്ങളുടെ ഇഷ്ട ഭാഷ തിരഞ്ഞെടുക്കുക",
+        "default": "ഡിഫോൾട്ട്"
+    },
+    "farmInfo": {
+        "title": "ഫാം വിവരങ്ങൾ",
+        "aiInsight": "AI ഉൾക്കാഴ്ച",
+        "aiInsightText": "പ്രവചിക്കപ്പെട്ട മഴയ്ക്ക് നിങ്ങളുടെ വിതയ്ക്കൽ തീയതി അനുയോജ്യമാണ്.",
+        "location": "സ്ഥലം",
+        "activeGeofence": "സജീവം",
+        "editLocation": "സ്ഥലം മാറ്റുക",
+        "farmDetails": "ഫാം വിശദാംശങ്ങൾ",
+        "totalLandSize": "ആകെ ഭൂമി",
+        "acres": "ഏക്കർ",
+        "currentCrop": "നിലവിലെ കൃഷി",
+        "lowWaterNeeds": "കുറഞ്ഞ വെള്ളം മതി",
+        "sowingDate": "വിതച്ച തീയതി",
+        "harvestExpected": "വിളവെടുപ്പ്: {{date}}",
+        "nextCropTimeline": "അടുത്തത്: വിള കാലയളവ്"
+    },
+    "cropTimeline": {
+        "title": "വിള കാലയളവ്",
+        "totalCycle": "ആകെ ചക്രം",
+        "estHarvest": "വിളവെടുപ്പ്",
+        "daysOf": "ദിവസം {{current}} / {{total}}",
+        "complete": "{{percent}}% പൂർത്തിയായി",
+        "lifecycleStages": "ജീവിതഘട്ടങ്ങൾ",
+        "stages": {
+            "sowing": "വിതയ്ക്കൽ",
+            "sowingDetail": "{{date}}-ൽ പൂർത്തിയായി",
+            "vegetative": "വളർച്ച",
+            "vegetativeDetail": "വേഗത്തിലുള്ള വളർച്ച. നൈട്രജൻ അളവ് പരിശോധിക്കുക.",
+            "flowering": "പൂവിടൽ",
+            "floweringDetail": "പ്രതീക്ഷിക്കുന്നത്: {{date}}",
+            "harvest": "വിളവെടുപ്പ്",
+            "harvestDetail": "പ്രതീക്ഷിക്കുന്നത്: {{date}}"
+        },
+        "current": "നിലവിലെ",
+        "aiRecommendations": "AI നിർദ്ദേശങ്ങൾ"
+    },
+    "adviceDetails": {
+        "title": "നിർദ്ദേശങ്ങൾ",
+        "mainQuestion": "ഇന്ന് വളം നൽകേണ്ടത് എന്തിന്?",
+        "aiConfidence": "AI വിശ്വാസം",
+        "high": "കൂടുതൽ",
+        "keyFactors": "പ്രധാന ഘടകങ്ങൾ",
+        "factors": {
+            "rain": "2 ദിവസത്തെ മഴ പ്രവചനം",
+            "rainDesc": "ചെറിയ മഴ (5mm) നല്ലതാണ്",
+            "flowering": "പൂവിടൽ ഘട്ടം",
+            "floweringDesc": "വളം നൽകാൻ നല്ല സമയം",
+            "soil": "മണ്ണിലെ നൈട്രജൻ",
+            "soilDesc": "നിലവിൽ കുറവാണ്"
+        },
+        "modelTransparency": "സുതാര്യത",
+        "transparencyText": "ശ്രദ്ധിക്കുക: AI ഒരു സഹായം മാത്രമാണ്, <1>നിങ്ങളുടെ ഭൂമി നിങ്ങളെക്കാൾ നന്നായി ആർക്കും അറിയില്ല.</1>",
+        "applyFertilizer": "വളം നൽകുക"
+    },
+    "chat": {
+        "title": "കാർഷിക സഹായി",
+        "heavyRain": "കനത്ത മഴ പ്രതീക്ഷിക്കുന്നു",
+        "heavyRainDesc": "നാളെ 40mm. ഡ്രെയിനേജ് പരിശോധിക്കുക.",
+        "today": "ഇന്ന്",
+        "read": "വായിച്ചു",
+        "inputPlaceholder": "ചോദ്യങ്ങൾ ചോദിക്കുക..."
+    }
+}

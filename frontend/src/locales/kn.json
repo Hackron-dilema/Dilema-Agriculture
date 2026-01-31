@@ -1,0 +1,76 @@
+{
+    "common": {
+        "continue": "ಮುಂದುವರಿಸಿ",
+        "edit": "ತಿದ್ದುಪಡಿ",
+        "back": "ಹಿಂದೆ",
+        "online": "ಆನ್‌ಲೈನ್",
+        "dismiss": "ರದ್ದುಗೊಳಿಸಿ"
+    },
+    "languageSelection": {
+        "title": "ನಿಮ್ಮ ಭಾಷೆಯನ್ನುರಿಸಿ",
+        "subtitle": "ಮುಂದುವರಿಯಲು ನಿಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+        "default": "ಡೀಫಾಲ್ಟ್"
+    },
+    "farmInfo": {
+        "title": "ಕೃಷಿ ಮಾಹಿತಿ",
+        "aiInsight": "AI ಒಳನೋಟ",
+        "aiInsightText": "ಈ ಹಂಗಾಮಿನ ನಿರೀಕ್ಷಿತ ಮಳೆಗೆ ನಿಮ್ಮ ಬಿತ್ತನೆ ದಿನಾಂಕ ಸರಿಯಾಗಿದೆ.",
+        "location": "ಸ್ಥಳ",
+        "activeGeofence": "ಸಕ್ರಿಯ",
+        "editLocation": "ಸ್ಥಳ ಬದಲಾಯಿಸಿ",
+        "farmDetails": "ಕೃಷಿ ವಿವರಗಳು",
+        "totalLandSize": "ಒಟ್ಟು ಭೂಮಿ",
+        "acres": "ಎಕರೆ",
+        "currentCrop": "ಪ್ರಸ್ತುತ ಬೆಳೆ",
+        "lowWaterNeeds": "ಕಡಿಮೆ ನೀರು ಸಾಕು",
+        "sowingDate": "ಬಿತ್ತನೆ ದಿನಾಂಕ",
+        "harvestExpected": "ಕಟಾವು: {{date}}",
+        "nextCropTimeline": "ಮುಂದೆ: ಬೆಳೆ ಕಾಲಾವಧಿ"
+    },
+    "cropTimeline": {
+        "title": "ಬೆಳೆ ಕಾಲಾವಧಿ",
+        "totalCycle": "ಒಟ್ಟು ಚಕ್ರ",
+        "estHarvest": "ಅಂದಾಜು ಕಟಾವು",
+        "daysOf": "ದಿನ {{current}} / {{total}}",
+        "complete": "{{percent}}% ಪೂರ್ಣ",
+        "lifecycleStages": "ಜೀವನ ಚಕ್ರದ ಹಂತಗಳು",
+        "stages": {
+            "sowing": "ಬಿತ್ತನೆ",
+            "sowingDetail": "{{date}} ರಂದು ಪೂರ್ಣಗೊಂಡಿದೆ",
+            "vegetative": "ಸಸ್ಯ ಬೆಳವಣಿಗೆ",
+            "vegetativeDetail": "ವೇಗವಾಗಿ ಎಲೆ ಬೆಳವಣಿಗೆ. ನೈಟ್ರೋಜನ್ ಮಟ್ಟ ಸರಿಯಾಗಿದೆಯೇ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
+            "flowering": "ಹೂ ಬಿಡುವುದು",
+            "floweringDetail": "ನಿರೀಕ್ಷಿತ: {{date}}",
+            "harvest": "ಕಟಾವು",
+            "harvestDetail": "ನಿರೀಕ್ಷಿತ: {{date}}"
+        },
+        "current": "ಪ್ರಸ್ತುತ",
+        "aiRecommendations": "AI ಶಿಫಾರಸುಗಳು"
+    },
+    "adviceDetails": {
+        "title": "ಸಲಹೆ ವಿವರಗಳು",
+        "mainQuestion": "ಇಂದು ಗೊಬ್ಬರ ಏಕೆ ಹಾಕಬೇಕು?",
+        "aiConfidence": "AI ನಂಬಿಕೆ",
+        "high": "ಹೆಚ್ಚು",
+        "keyFactors": "ಪ್ರಮುಖ ಅಂಶಗಳು",
+        "factors": {
+            "rain": "2 ದಿನಗಳ ಮಳೆ ಮುನ್ಸೂಚನೆ ಆಧರಿಸಿ",
+            "rainDesc": "ಸಣ್ಣ ಮಳೆ (5mm) ಹೀರಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ",
+            "flowering": "ಹೂ ಬಿಡುವ ಹಂತದ ಆಧರಿಸಿ",
+            "floweringDesc": "ಪೋಷಕಾಂಶ ನೀಡಲು ಉತ್ತಮ ಸಮಯ",
+            "soil": "ಮಣ್ಣಿನ ನೈಟ್ರೋಜನ್ ಆಧರಿಸಿ",
+            "soilDesc": "ಪ್ರಸ್ತುತ ಕಡಿಮೆಯಾಗಿದೆ"
+        },
+        "modelTransparency": "ಪಾರದರ್ಶಕತೆ",
+        "transparencyText": "ಗಮನಿಸಿ: AI ಒಂದು ಸಾಧನ ಮಾತ್ರ, <1>ನಿಮ್ಮ ಜಮೀನು ನಿಮಗೆ ಚೆನ್ನಾಗಿ ಗೊತ್ತು.</1>",
+        "applyFertilizer": "ಗೊಬ್ಬರ ಹಾಕಿ"
+    },
+    "chat": {
+        "title": "ಕೃಷಿ ಸಹಾಯಕ",
+        "heavyRain": "ಭಾರೀ ಮಳೆ ನಿರೀಕ್ಷೆ",
+        "heavyRainDesc": "ನಾಳೆ 40mm. ಚರಂಡಿ ವ್ಯವಸ್ಥೆ ನೋಡಿ.",
+        "today": "ಇಂದು",
+        "read": "ಓದಲಾಗಿದೆ",
+        "inputPlaceholder": "ಕೀಟಗಳು, ಹವಾಮಾನದ ಬಗ್ಗೆ ಕೇಳಿ..."
+    }
+}

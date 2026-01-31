@@ -1,0 +1,94 @@
+{
+    "common": {
+        "continue": "కొనసాగించండి",
+        "edit": "సవరించు",
+        "back": "వెనుకకు",
+        "online": "ఆన్‌లైన్",
+        "dismiss": "సిఫార్సు వద్దు"
+    },
+    "languageSelection": {
+        "title": "భాషను ఎంచుకోండి",
+        "subtitle": "కొనసాగించడానికి మీ భాషను ఎంచుకోండి",
+        "default": "డిఫాల్ట్"
+    },
+    "farmInfo": {
+        "title": "పొలం సమాచారం",
+        "aiInsight": "AI సూచన",
+        "aiInsightText": "రాబోయే వర్షానికి మీ విత్తే తేదీ సరైనది.",
+        "location": "స్థానం",
+        "activeGeofence": "యాక్టివ్",
+        "editLocation": "స్థానం మార్చండి",
+        "farmDetails": "పొలం వివరాలు",
+        "totalLandSize": "మొత్తం భూమి",
+        "acres": "ఎకరాలు",
+        "currentCrop": "ప్రస్తుత పంట",
+        "lowWaterNeeds": "తక్కువ నీరు అవసరం",
+        "sowingDate": "విత్తిన తేదీ",
+        "harvestExpected": "కోత: {{date}}",
+        "nextCropTimeline": "తరువాత: పంట కాలక్రమం"
+    },
+    "cropTimeline": {
+        "title": "పంట కాలక్రమం",
+        "totalCycle": "మొత్తం చక్రం",
+        "estHarvest": "అంచనా కోత",
+        "daysOf": "రోజు {{current}} / {{total}}",
+        "complete": "{{percent}}% పూర్తయింది",
+        "lifecycleStages": "జీవిత దశలు",
+        "stages": {
+            "sowing": "విత్తడం",
+            "sowingDetail": "{{date}}న పూర్తయింది",
+            "vegetative": "పెరుగుదల",
+            "vegetativeDetail": "వేగంగా ఆకు పెరుగుదల. నైట్రోజన్ సరిపడా ఉందా అని చూడండి.",
+            "flowering": "పూత",
+            "floweringDetail": "అంచనా: {{date}}",
+            "harvest": "కోత",
+            "harvestDetail": "అంచనా: {{date}}"
+        },
+        "current": "ప్రస్తుత",
+        "aiRecommendations": "AI సిఫార్సులు"
+    },
+    "adviceDetails": {
+        "title": "సలహా వివరాలు",
+        "mainQuestion": "ఈ రోజు ఎరువు ఎందుకు వేయాలి?",
+        "aiConfidence": "AI నమ్మకం",
+        "high": "ఎక్కువ",
+        "keyFactors": "ముఖ్య కారకాలు",
+        "factors": {
+            "rain": "2 రోజుల వర్ష సూచన ఆధారంగా",
+            "rainDesc": "తేలికపాటి వర్షం (5mm) మంచిది",
+            "flowering": "పూత దశ ఆధారంగా",
+            "floweringDesc": "పోషకాలకు సరైన సమయం",
+            "soil": "నేల నైట్రోజన్ ఆధారంగా",
+            "soilDesc": "ప్రస్తుతం తక్కువగా ఉంది"
+        },
+        "modelTransparency": "పారదర్శకత",
+        "transparencyText": "గమనించండి: AI సహాయపడుతుంది, కానీ <1>మీ భూమి గురించి మీకే బాగా తెలుసు.</1>",
+        "applyFertilizer": "ఎరువు వేయండి"
+    },
+    "chat": {
+        "title": "వ్యవసాయ సహాయకుడు",
+        "heavyRain": "భారీ వర్షం సూచన",
+        "heavyRainDesc": "రేపు 40mm. డ్రైనేజీ చూడండి.",
+        "today": "ఈ రోజు",
+        "read": "చూసారు",
+        "inputPlaceholder": "ప్రశ్నలు అడగండి..."
+    }
+    ,
+    "profile": {
+        "addressTitle": "చిరునామా",
+        "editAddress": "చిరునామా సవరించండి",
+        "street": "వీధి / రోడ్",
+        "city": "నగరం",
+        "state": "ప్రాంతం",
+        "postalCode": "పిన్ కోడ్",
+        "country": "దేశం",
+        "save": "సేవ్ చేయండి",
+        "addressSaved": "చిరునామా సేవ్ చేయబడింది",
+        "saveError": "సేవ్ చేయలేకపోయాం",
+        "streetPlaceholder": "మీ వీధి పేరును నమోదు చేయండి",
+        "cityPlaceholder": "మీ నగరం",
+        "statePlaceholder": "మీ ప్రాంతం",
+        "postalPlaceholder": "పిన్ కోడ్",
+        "countryPlaceholder": "దేశం"
+    }
+}

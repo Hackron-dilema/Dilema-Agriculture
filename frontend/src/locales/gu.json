@@ -1,0 +1,76 @@
+{
+    "common": {
+        "continue": "ચાલુ રાખો",
+        "edit": "ફેરફાર કરો",
+        "back": "પાછા",
+        "online": "ઓનલાઇન",
+        "dismiss": "રદ કરો"
+    },
+    "languageSelection": {
+        "title": "તમારી ભાષા પસંદ કરો",
+        "subtitle": "ચાલુ રાખવા માટે તમારી પસંદગીની ભાષા પસંદ કરો",
+        "default": "ડિફૉલ્ટ"
+    },
+    "farmInfo": {
+        "title": "ખેતરની માહિતી",
+        "aiInsight": "AI ઇનસાઇટ",
+        "aiInsightText": "આ મોસમમાં વરસાદની આગાહી માટે તમારી વાવણીની તારીખ યોગ્ય છે.",
+        "location": "સ્થાન",
+        "activeGeofence": "સક્રિય",
+        "editLocation": "સ્થાન બદલો",
+        "farmDetails": "ખેતરની વિગતો",
+        "totalLandSize": "કુલ જમીન",
+        "acres": "એકર",
+        "currentCrop": "વર્તમાન પાક",
+        "lowWaterNeeds": "ઓછા પાણીની જરૂર",
+        "sowingDate": "વાવણી તારીખ",
+        "harvestExpected": "કાપણી: {{date}}",
+        "nextCropTimeline": "આગળ: પાક સમયરેખા"
+    },
+    "cropTimeline": {
+        "title": "પાક સમયરેખા",
+        "totalCycle": "કુલ ચક્ર",
+        "estHarvest": "અંદાજિત કાપણી",
+        "daysOf": "દિવસ {{current}} / {{total}}",
+        "complete": "{{percent}}% પૂર્ણ",
+        "lifecycleStages": "જીવનચક્ર તબક્કા",
+        "stages": {
+            "sowing": "વાવણી",
+            "sowingDetail": "{{date}} ના રોજ પૂર્ણ",
+            "vegetative": "વિકાસ",
+            "vegetativeDetail": "ઝડપી પાંદડાનો વિકાસ. નાઈટ્રોજન સ્તર પૂરતું છે કે નહીં તે તપાસો.",
+            "flowering": "ફૂલ આવવા",
+            "floweringDetail": "અપેક્ષિત: {{date}}",
+            "harvest": "કાપણી",
+            "harvestDetail": "અપેક્ષિત: {{date}}"
+        },
+        "current": "વર્તમાન",
+        "aiRecommendations": "AI ભલામણો"
+    },
+    "adviceDetails": {
+        "title": "સલાહ વિગતો",
+        "mainQuestion": "આજે ખાતર શા માટે નાખવું?",
+        "aiConfidence": "AI વિશ્વાસ",
+        "high": "ઉચ્ચ",
+        "keyFactors": "મુખ્ય પરિબળો",
+        "factors": {
+            "rain": "2 દિવસની વરસાદની આગાહી પર આધારિત",
+            "rainDesc": "હળવો વરસાદ (5mm) મદદરૂપ છે",
+            "flowering": "ફૂલ આવવાના તબક્કા પર આધારિત",
+            "floweringDesc": "પોષક તત્વો માટે શ્રેષ્ઠ સમય",
+            "soil": "જમીન નાઈટ્રોજન પર આધારિત",
+            "soilDesc": "હાલમાં ઓછું છે"
+        },
+        "modelTransparency": "પારદર્શિતા",
+        "transparencyText": "નોંધ લો: AI એક સાધન છે, <1>તમારી જમીન તમે સૌથી વધુ સારી રીતે જાણો છો.</1>",
+        "applyFertilizer": "ખાતર નાખો"
+    },
+    "chat": {
+        "title": "ખેતી સહાયક",
+        "heavyRain": "ભારે વરસાદની શક્યતા",
+        "heavyRainDesc": "આવતીકાલે 40mm. ડ્રેનેજ તપાસો.",
+        "today": "આજે",
+        "read": "વંચાયેલ",
+        "inputPlaceholder": "જીવાત, હવામાન વિશે પૂછો..."
+    }
+}
