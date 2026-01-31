@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,4 +11,314 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Krishi Mitra - AI Farm Advisor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Language Selection Screen -->
+        <div id="screen-language" class="screen active">
+            <div class="screen-content">
+                <div class="logo-container">
+                    <div class="logo">🌾</div>
+                    <h1>Krishi Mitra</h1>
+                    <p class="tagline">Your AI-Powered Farm Advisor</p>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Select Your Language</h2>
+                    <p class="subtitle">भाषा चुनें</p>
+                    
+                    <div class="language-grid">
+                        <button class="language-btn" data-lang="en" data-next="screen-phone">
+                            <span class="lang-icon">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                        </button>
+                        <button class="language-btn" data-lang="hi" data-next="screen-phone">
+                            <span class="lang-icon">🇮🇳</span>
+                            <span class="lang-name">हिंदी</span>
+                        </button>
+                        <button class="language-btn" data-lang="te" data-next="screen-phone">
+                            <span class="lang-icon">🇮🇳</span>
+                            <span class="lang-name">తెలుగు</span>
+                        </button>
+                        <button class="language-btn" data-lang="kn" data-next="screen-phone">
+                            <span class="lang-icon">🇮🇳</span>
+                            <span class="lang-name">ಕನ್ನಡ</span>
+                        </button>
+                        <button class="language-btn" data-lang="ta" data-next="screen-phone">
+                            <span class="lang-icon">🇮🇳</span>
+                            <span class="lang-name">தமிழ்</span>
+                        </button>
+                        <button class="language-btn" data-lang="mr" data-next="screen-phone">
+                            <span class="lang-icon">🇮🇳</span>
+                            <span class="lang-name">मराठी</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone Number Screen -->
+        <div id="screen-phone" class="screen">
+            <div class="screen-content">
+                <button class="back-btn" data-back="screen-language">←</button>
+                
+                <div class="form-section centered">
+                    <div class="icon-large">📱</div>
+                    <h2>Enter Your Phone Number</h2>
+                    <p class="subtitle">We'll send you a verification code</p>
+                    
+                    <div class="input-group">
+                        <span class="input-prefix">+91</span>
+                        <input type="tel" id="phone-input" placeholder="9876543210" maxlength="10" pattern="[0-9]*" inputmode="numeric">
+                    </div>
+                    
+                    <button id="btn-send-otp" class="btn-primary">Send OTP</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- OTP Verification Screen -->
+        <div id="screen-otp" class="screen">
+            <div class="screen-content">
+                <button class="back-btn" data-back="screen-phone">←</button>
+                
+                <div class="form-section centered">
+                    <div class="icon-large">🔐</div>
+                    <h2>Verify OTP</h2>
+                    <p class="subtitle">Enter the 6-digit code sent to <span id="otp-phone"></span></p>
+                    
+                    <div class="otp-input-group">
+                        <input type="text" class="otp-input" maxlength="1" data-index="0" inputmode="numeric">
+                        <input type="text" class="otp-input" maxlength="1" data-index="1" inputmode="numeric">
+                        <input type="text" class="otp-input" maxlength="1" data-index="2" inputmode="numeric">
+                        <input type="text" class="otp-input" maxlength="1" data-index="3" inputmode="numeric">
+                        <input type="text" class="otp-input" maxlength="1" data-index="4" inputmode="numeric">
+                        <input type="text" class="otp-input" maxlength="1" data-index="5" inputmode="numeric">
+                    </div>
+                    
+                    <p class="hint-text">For testing, use OTP: <strong>123456</strong></p>
+                    
+                    <button id="btn-verify-otp" class="btn-primary">Verify</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Location Permission Screen -->
+        <div id="screen-location" class="screen">
+            <div class="screen-content">
+                <div class="form-section centered">
+                    <div class="icon-large">📍</div>
+                    <h2>Enable Location</h2>
+                    <p class="subtitle">We need your location for accurate weather forecasts and farming advice</p>
+                    
+                    <div class="location-info" id="location-display" style="display: none;">
+                        <div class="location-icon">✓</div>
+                        <p id="location-text"></p>
+                    </div>
+                    
+                    <button id="btn-get-location" class="btn-primary">📍 Allow Location Access</button>
+                    
+                    <div class="manual-location" id="manual-location" style="display: none;">
+                        <p>Or enter your location manually:</p>
+                        <input type="text" id="manual-location-input" placeholder="Village, District, State">
+                    </div>
+                    
+                    <button id="btn-continue-location" class="btn-primary" style="display: none;">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Farm Setup Screen (Form-based) -->
+        <div id="screen-farm-setup" class="screen">
+            <div class="screen-content">
+                <button class="back-btn" data-back="screen-location">←</button>
+                
+                <div class="form-section">
+                    <h2>👤 About You & Your Farm</h2>
+                    <p class="subtitle">Tell us about yourself to get personalized advice</p>
+                    
+                    <div class="form-group">
+                        <label>Your Name *</label>
+                        <input type="text" id="farmer-name" placeholder="What should we call you?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Land Size *</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="land-size" placeholder="e.g., 5" step="0.5" min="0.1" required>
+                            <select id="land-unit">
+                                <option value="acres">Acres</option>
+                                <option value="bigha">Bigha</option>
+                                <option value="hectares">Hectares</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>How do you irrigate your land? *</label>
+                        <p class="field-hint">Select the type you use most:</p>
+                        <div class="irrigation-grid" id="irrigation-selector">
+                            <div class="irrigation-card" data-value="drip">
+                                <div class="card-emoji">💧</div>
+                                <div class="card-title">Drip</div>
+                                <div class="card-desc">Water drops to roots</div>
+                            </div>
+                            <div class="irrigation-card" data-value="sprinkler">
+                                <div class="card-emoji">🌧️</div>
+                                <div class="card-title">Sprinkler</div>
+                                <div class="card-desc">Spray from above</div>
+                            </div>
+                            <div class="irrigation-card" data-value="flood">
+                                <div class="card-emoji">🌊</div>
+                                <div class="card-title">Flood/Canal</div>
+                                <div class="card-desc">Field flooding</div>
+                            </div>
+                            <div class="irrigation-card" data-value="rainfed">
+                                <div class="card-emoji">☔</div>
+                                <div class="card-title">Rainfed Only</div>
+                                <div class="card-desc">Depend on rain</div>
+                            </div>
+                            <div class="irrigation-card" data-value="borewell">
+                                <div class="card-emoji">🕳️</div>
+                                <div class="card-title">Borewell</div>
+                                <div class="card-desc">Underground pump</div>
+                            </div>
+                            <div class="irrigation-card" data-value="mixed">
+                                <div class="card-emoji">🔄</div>
+                                <div class="card-title">Mixed</div>
+                                <div class="card-desc">Multiple methods</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="irrigation-type" value="">
+                    </div>
+                    
+                    <button id="btn-complete-setup" class="btn-primary" disabled>Continue to Chat 💬</button>
+                    <p class="form-note">* Our AI will ask about your crops in the chat</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Screen (Main Interface) -->
+        <div id="screen-chat" class="screen">
+            <div class="chat-container">
+                <!-- Header -->
+                <div class="chat-header">
+                    <div class="header-left">
+                        <div class="avatar">🌾</div>
+                        <div class="header-info">
+                            <h1>Krishi Mitra</h1>
+                            <span class="status online">● Online</span>
+                        </div>
+                    </div>
+                    <button class="menu-btn" id="btn-menu">☰</button>
+                </div>
+                
+                <!-- Crop Status Bar -->
+                <div class="crop-status-bar" id="crop-status-bar">
+                    <div class="crop-info">
+                        <span class="crop-icon">🌱</span>
+                        <span class="crop-name" id="crop-name-display">Loading...</span>
+                        <span class="crop-stage" id="crop-stage-display"></span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="crop-progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <!-- Messages -->
+                <div class="messages-container" id="messages-container">
+                    <div class="message bot">
+                        <div class="message-avatar">🌾</div>
+                        <div class="message-content">
+                            <p>Welcome to Krishi Mitra! 🌾</p>
+                            <p>I'm your AI farming assistant. I can help you with:</p>
+                            <ul>
+                                <li>💧 Irrigation advice</li>
+                                <li>🌦️ Weather updates</li>
+                                <li>🌱 Crop status</li>
+                                <li>⚠️ Risk alerts</li>
+                            </ul>
+                            <p>Just ask me anything about your farm!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions" id="quick-actions">
+                    <button class="quick-btn" data-query="Should I water my crop today?">💧 Irrigation</button>
+                    <button class="quick-btn" data-query="What's the weather forecast?">🌦️ Weather</button>
+                    <button class="quick-btn" data-query="How is my crop doing?">🌱 Crop Status</button>
+                    <button class="quick-btn" data-query="When should I harvest?">🌾 Harvest</button>
+                </div>
+                
+                <!-- Input Area -->
+                <div class="input-area">
+                    <button id="btn-voice" class="voice-btn" title="Speak">🎤</button>
+                    <input type="text" id="message-input" placeholder="Type or speak your question...">
+                    <button id="btn-send" class="send-btn">➤</button>
+                </div>
+                
+                <!-- Voice Status Indicator -->
+                <div id="voice-status" class="voice-status" style="display: none;">
+                    <div class="voice-indicator">
+                        <span class="pulse"></span>
+                        <span id="voice-status-text">Listening...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TTS Toggle Button (floating) -->
+            <button id="btn-tts-toggle" class="tts-toggle" title="Toggle voice responses">
+                🔊
+            </button>
+        </div>
+
+        <!-- Side Menu -->
+        <div class="side-menu" id="side-menu">
+            <div class="menu-header">
+                <button class="close-menu" id="close-menu">×</button>
+                <h2>Menu</h2>
+            </div>
+            <div class="menu-content">
+                <div class="menu-section">
+                    <h3>My Farm</h3>
+                    <div class="farm-summary" id="farm-summary">
+                        <p>Loading...</p>
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <h3>Actions</h3>
+                    <button class="menu-item" id="btn-add-crop">➕ Add New Crop</button>
+                    <button class="menu-item" id="btn-view-history">📜 Chat History</button>
+                    <button class="menu-item" id="btn-settings">⚙️ Settings</button>
+                </div>
+                <div class="menu-section">
+                    <button class="menu-item danger" id="btn-logout">🚪 Logout</button>
+                </div>
+            </div>
+        </div>
+        <div class="menu-overlay" id="menu-overlay"></div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <p id="loading-text">Loading...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+>>>>>>> ee04d16 (Part 5 & 6: Frontend (HTML, CSS, JS) + Docs & Config)
 </html>
