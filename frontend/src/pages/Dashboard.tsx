@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MobileContainer } from '../components/layout/MobileContainer';
@@ -28,40 +28,62 @@ const languages = [
     { code: 'ml', name: 'മലയാളം', flag: '🌴' },
 ];
 
+import { useEffect } from 'react';
+import { cropService, profileService } from '../services/api';
+
 const Dashboard = () => {
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const [showLangMenu, setShowLangMenu] = useState(false);
+    const [cropStatus, setCropStatus] = useState<any>(null);
+    const [weather, setWeather] = useState<any>(null);
+    const [impact, setImpact] = useState<any>(null);
+    const [farmerName, setFarmerName] = useState('Farmer');
+    const [farmerLocation, setFarmerLocation] = useState('');
+
+    useEffect(() => {
+        // Load farmer name from storage or fetch
+        const name = localStorage.getItem('farmerName') || 'Farmer';
+        setFarmerName(name);
+
+        const fetchData = async () => {
+            try {
+                const farmerId = localStorage.getItem('farmerId');
+                if (!farmerId) return;
+
+                const id = parseInt(farmerId);
+
+                // Parallel fetch for speed
+                const [statusData, weatherData, profileData] = await Promise.all([
+                    cropService.getCropStatus(id),
+                    cropService.getWeather(id),
+                    profileService.getMe().catch(() => null)
+                ]);
+
+                if (statusData.crops && statusData.crops.length > 0) {
+                    setCropStatus(statusData.crops[0]);
+                }
+
+                if (weatherData) {
+                    setWeather(weatherData);
+                    setImpact(weatherData.farming_impact);
+                }
+
+                if (profileData) {
+                    if (profileData.name) setFarmerName(profileData.name);
+                    if (profileData.location_name) setFarmerLocation(profileData.location_name);
+                }
+            } catch (error) {
+                console.error('Failed to load dashboard data', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleLanguageChange = (code: string) => {
         i18n.changeLanguage(code);
         setShowLangMenu(false);
     };
-
-    const [cropStatus, setCropStatus] = useState<any>(null);
-    const [farmerName, setFarmerName] = useState('Farmer');
-
-    useEffect(() => {
-        // Load farmer name
-        const name = localStorage.getItem('farmerName') || 'Farmer';
-        setFarmerName(name);
-
-        // Load crop status
-        const fetchStatus = async () => {
-            try {
-                const farmerId = parseInt(localStorage.getItem('farmerId') || '0');
-                if (farmerId) {
-                    const data = await import('../services/api').then(m => m.cropService.getCropStatus(farmerId));
-                    if (data.crops && data.crops.length > 0) {
-                        setCropStatus(data.crops[0]);
-                    }
-                }
-            } catch (error) {
-                console.error('Failed to load crop status', error);
-            }
-        };
-        fetchStatus();
-    }, []);
 
     const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
 
@@ -119,7 +141,7 @@ const Dashboard = () => {
                         <h2 className="text-xl font-bold">{t('dashboard.greeting', { name: farmerName })}</h2>
                         <div className="flex items-center gap-1 text-green-600 text-sm font-medium">
                             <span className="w-2 h-2 bg-green-500 rounded-full inline-block"></span>
-                            Sonipat, Haryana
+                            {farmerLocation || 'Location not set'}
                         </div>
                     </div>
                 </div>
@@ -163,21 +185,28 @@ const Dashboard = () => {
                             <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-3 text-green-600">
                                 <Tractor className="w-6 h-6" />
                             </div>
-                            <h4 className="font-bold">{cropStatus ? (cropStatus.crop_name || 'Crop Status') : t('dashboard.services.cropHealth')}</h4>
+                            <h4 className="font-bold">{cropStatus ? cropStatus.crop_name : t('dashboard.services.cropHealth')}</h4>
                             <p className="text-xs text-green-600 mt-1">
                                 {cropStatus
-                                    ? `${(cropStatus.stage || '').replace('_', ' ')} • ${Math.round((cropStatus.overall_progress || 0) * 100)}%`
+                                    ? `${cropStatus.stage.replace('_', ' ')} • ${Math.round(cropStatus.overall_progress * 100)}%`
                                     : t('dashboard.services.checkPests')}
                             </p>
                         </div>
 
-                        {/* Service 2 */}
+                        {/* Weather Card */}
                         <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-start hover:border-blue-200 transition-colors cursor-pointer text-gray-900">
                             <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-3 text-blue-600">
                                 <CloudSun className="w-6 h-6" />
                             </div>
-                            <h4 className="font-bold">{t('dashboard.services.weather')}</h4>
-                            <p className="text-xs text-blue-600 mt-1">{t('dashboard.services.weatherAlerts')}</p>
+                            <h4 className="font-bold">
+                                {weather?.current?.temperature ? `${Math.round(weather.current.temperature)}°C` : t('dashboard.services.weather')}
+                            </h4>
+                            <p className="text-xs text-blue-600 mt-1">
+                                {weather?.current?.condition
+                                    ? weather.current.condition
+                                    : t('dashboard.services.weatherAlerts')}
+                                {impact?.spray_safe && ' • Spraying Safe'}
+                            </p>
                         </div>
 
                         {/* Service 3 */}
@@ -188,6 +217,8 @@ const Dashboard = () => {
                             <h4 className="font-bold">{t('dashboard.services.mandiRates')}</h4>
                             <p className="text-xs text-orange-600 mt-1">{t('dashboard.services.marketPrices')}</p>
                         </div>
+
+                        {/* Service 4 - REMOVED */}
                     </div>
                 </div>
 

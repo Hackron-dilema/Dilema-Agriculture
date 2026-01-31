@@ -16,24 +16,25 @@ export interface ProfileData {
     phone: string;
     name: string;
     language: string;
-    latitude: number;
-    longitude: number;
-    location_name: string;
-    land_size_acres: number;
-    irrigation_type: string;
+    latitude?: number;
+    longitude?: number;
+    location_name?: string;
+    land_size_acres?: number;
+    irrigation_type?: string;
 }
 
 export interface ChatResponse {
     response: string;
     alerts?: string[];
-    data_sources?: any[];
+    data_sources?: string[];
     confidence?: number;
+    reasoning?: string;
 }
 
 // API Instance
 const api = axios.create({
     baseURL: API_BASE,
-    timeout: 2000,
+    timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -64,20 +65,39 @@ export const authService = {
 };
 
 export const profileService = {
-    basicOnboard: async (data: ProfileData) => {
+    onboard: async (data: any) => {
+        const response = await api.post('/profile/onboard', data);
+        return response.data;
+    },
+
+    basicOnboard: async (data: any) => {
         const response = await api.post('/profile/basic-onboard', data);
         return response.data;
     },
 
-    getProfile: async (farmerId: number) => {
-        // Placeholder for future use
-        console.log('Getting profile for', farmerId);
+    getMe: async () => {
+        const response = await api.get('/profile/me');
+        return response.data;
+    },
+
+    getFarmerCrops: async (farmerId: number) => {
+        const response = await api.get(`/profile/farmer/${farmerId}/crops`);
+        return response.data;
+    },
+
+    updateProfile: async (data: { phone: string; latitude?: number; longitude?: number; location_name?: string; language?: string }) => {
+        const response = await api.post('/profile/basic-onboard', data);
+        return response.data;
     }
 };
 
 export const cropService = {
     getCropStatus: async (farmerId: number) => {
         const response = await api.get(`/crop-status/${farmerId}`);
+        return response.data;
+    },
+    getWeather: async (farmerId: number) => {
+        const response = await api.get(`/weather/${farmerId}`);
         return response.data;
     }
 };
@@ -88,6 +108,10 @@ export const chatService = {
             content,
             farmer_id: farmerId
         });
+        return response.data;
+    },
+    getHistory: async (farmerId: number) => {
+        const response = await api.get(`/history/${farmerId}`);
         return response.data;
     }
 };

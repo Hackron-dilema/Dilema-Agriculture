@@ -73,9 +73,9 @@ class WeatherAgent(BaseAgent):
         
         if not lat or not lon:
             return AgentResponse(
-                result={"error": "Location not available"},
+                result={"error": "Location not set"},
                 confidence=0.0,
-                reasoning="Cannot fetch weather without location",
+                reasoning="Weather data is unavailable because your location is not set in your profile. Please update your location in the Profile settings.",
                 data_sources=[]
             )
         
@@ -814,7 +814,14 @@ class DecisionOrchestrator:
         }
         
         llm_response = await self.llm_agent.execute(response_context)
-        final_response = llm_response.result.get("response", recommendation)
+        final_response = llm_response.result.get("response")
+        
+        # If LLM failed, use the deterministic recommendation as fallback
+        if not final_response:
+            if farmer.name:
+                final_response = f"Hello {farmer.name}! {recommendation}"
+            else:
+                final_response = recommendation
         
         # Calculate overall confidence
         confidences = [

@@ -3,29 +3,78 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MobileContainer } from '../components/layout/MobileContainer';
 import { BottomNav } from '../components/layout/BottomNav';
-import {
-    Menu,
-    MapPin,
-    RefreshCw,
-    Sprout,
-    Calendar,
-    Droplets,
-    Sun,
-    Volume2,
-    VolumeX,
-    LogOut,
-    Globe,
-    ChevronRight
-} from 'lucide-react';
+import { ChevronRight, LogOut, RefreshCw, Sun, Droplets, Calendar, Sprout, Globe, VolumeX, Volume2, MapPin, Menu } from 'lucide-react';
 import { useGeolocation } from '../hooks/useGeolocation';
+import { profileService } from '../services/api';
+import { useEffect } from 'react';
 
 const Profile = () => {
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
-    const { address, loading, getLocation } = useGeolocation();
+    const { address, loading, getLocation, latitude, longitude } = useGeolocation();
 
     const [voiceEnabled, setVoiceEnabled] = useState(true);
     const [landType, setLandType] = useState<'dry' | 'wet'>('dry');
+    const [farmer, setFarmer] = useState<any>(null);
+    const [crops, setCrops] = useState<any[]>([]);
+    const [isSaving, setIsSaving] = useState(false);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const farmerId = parseInt(localStorage.getItem('farmerId') || '1');
+                const [profileData, cropsData] = await Promise.all([
+                    profileService.getMe(),
+                    profileService.getFarmerCrops(farmerId)
+                ]);
+                setFarmer(profileData);
+                setCrops(cropsData);
+                if (profileData.irrigation_type) {
+                    setLandType(profileData.irrigation_type.toLowerCase() === 'wet' ? 'wet' : 'dry');
+                }
+            } catch (error) {
+                console.error('Failed to load profile', error);
+            }
+        };
+        fetchProfile();
+    }, []);
+
+    // Sync location to backend when address updates
+    useEffect(() => {
+        const syncLocation = async () => {
+            if (!address || !latitude || !longitude || !farmer) return;
+
+            setIsSaving(true);
+            try {
+                const phone = localStorage.getItem('phone') || farmer.phone;
+                const locationName = `${address.city}, ${address.state}`;
+
+                const response = await profileService.updateProfile({
+                    phone,
+                    latitude,
+                    longitude,
+                    location_name: locationName
+                });
+
+                if (response.access_token) {
+                    localStorage.setItem('token', response.access_token);
+                }
+
+                // Update local farmer state
+                setFarmer({ ...farmer, location_name: locationName, latitude, longitude });
+            } catch (error) {
+                console.error('Failed to sync location:', error);
+            } finally {
+                setIsSaving(false);
+            }
+        };
+        syncLocation();
+    }, [address, latitude, longitude]);
+
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate('/');
+    };
 
     // Hardcoded languages for big buttons (common + current)
     const commonLanguages = [
@@ -55,10 +104,22 @@ const Profile = () => {
                     <Menu className="w-6 h-6" />
                 </button>
                 <h1 className="text-xl font-bold text-gray-900">{t('profile.title')}</h1>
-                <div className="w-10"></div> {/* Spacer for center alignment */}
+                <div className="w-10"></div>
             </header>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-6 pb-24">
+                {/* Farmer Info Card */}
+                {farmer && (
+                    <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold text-xl">
+                            {farmer.name?.[0] || 'F'}
+                        </div>
+                        <div>
+                            <h2 className="text-lg font-bold text-gray-900">{farmer.name || t('common.farmer')}</h2>
+                            <p className="text-sm text-gray-500">{farmer.phone}</p>
+                        </div>
+                    </div>
+                )}
 
                 {/* Language Section */}
                 <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
@@ -112,6 +173,7 @@ const Profile = () => {
                             </span>
                         </div>
                         {loading && <p className="text-xs text-blue-500 mt-2 font-medium animate-pulse">Updating location...</p>}
+                        {isSaving && <p className="text-xs text-green-500 mt-2 font-medium animate-pulse">Saving to server...</p>}
                     </div>
 
                     <button
@@ -130,22 +192,27 @@ const Profile = () => {
                         <h2 className="text-lg font-bold text-gray-900">{t('profile.cropDetails')}</h2>
                     </div>
 
-                    <div className="flex items-center gap-4">
-                        <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center shrink-0 border-2 border-white shadow-sm overflow-hidden">
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Paddy_Fields_in_Tamil_Nadu_-_panoramio.jpg/1200px-Paddy_Fields_in_Tamil_Nadu_-_panoramio.jpg"
-                                alt="Rice"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <h3 className="text-xl font-bold text-gray-900">{t('myCrops.rice')}</h3>
-                            <div className="flex items-center gap-2 text-sm text-gray-600 mt-1">
-                                <Calendar className="w-4 h-4 text-gray-400" />
-                                <span>{t('profile.sowingDate')}: <strong>Oct 15, 2023</strong></span>
+                    {crops.length > 0 ? (
+                        crops.map((crop) => (
+                            <div key={crop.id} className="flex items-center gap-4 mb-4 last:mb-0">
+                                <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center shrink-0 border-2 border-white shadow-sm overflow-hidden">
+                                    <Sprout className="w-10 h-10 text-green-600" />
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="text-xl font-bold text-gray-900 capitalize">{crop.crop_type}</h3>
+                                    <div className="flex items-center gap-2 text-sm text-gray-600 mt-1">
+                                        <Calendar className="w-4 h-4 text-gray-400" />
+                                        <span>{t('profile.sowingDate')}: <strong>{new Date(crop.sowing_date).toLocaleDateString()}</strong></span>
+                                    </div>
+                                    <div className="mt-2 text-xs font-bold text-green-600">
+                                        {crop.current_stage.replace('_', ' ')}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        ))
+                    ) : (
+                        <p className="text-gray-500 text-sm">No active crops found.</p>
+                    )}
 
                     <div className="mt-4 bg-gray-50 rounded-xl p-3 border border-gray-100">
                         <div className="flex justify-between text-xs mb-1">
@@ -209,11 +276,11 @@ const Profile = () => {
                 {/* Help Actions */}
                 <div className="pb-4">
                     <button
-                        onClick={() => navigate('/')}
+                        onClick={handleLogout}
                         className="w-full bg-red-50 text-red-600 font-bold py-4 rounded-xl flex items-center justify-center gap-2 mb-4 hover:bg-red-100 transition-colors"
                     >
                         <LogOut className="w-5 h-5" />
-                        {t('profile.startAgain')}
+                        {t('profile.startAgain', 'Logout / Start Again')}
                     </button>
                 </div>
 

@@ -21,7 +21,6 @@ const OTPVerification = () => {
 
     const handleChange = (index: number, value: string) => {
         if (value.length > 1) {
-            // Handle paste
             const pasteData = value.split('').slice(0, 6);
             const newOtp = [...otp];
             pasteData.forEach((char, i) => {
@@ -40,7 +39,6 @@ const OTPVerification = () => {
         newOtp[index] = value;
         setOtp(newOtp);
 
-        // Auto move to next
         if (value && index < 5) {
             inputsRef.current[index + 1]?.focus();
         }
@@ -62,27 +60,26 @@ const OTPVerification = () => {
         try {
             const response = await authService.verifyOtp(phone, otpString);
             if (response.access_token) {
-                // Save token
                 localStorage.setItem('token', response.access_token);
                 if (response.farmer_id) localStorage.setItem('farmerId', response.farmer_id.toString());
 
-                // Route based on user status
                 if (response.is_new_user) {
-                    navigate('/farm-info'); // Skip location for now or add it later
+                    navigate('/farm-info');
                 } else {
-                    navigate('/dashboard'); // Or chat
+                    navigate('/dashboard');
                 }
             } else {
                 setError('Invalid OTP');
             }
         } catch (err: any) {
             console.error(err);
-            if (otpString === '123456') { // Demo backdoor
+            const expectedOtp = location.state?.fakeOtp || '123456';
+            if (otpString === expectedOtp) {
                 localStorage.setItem('token', 'demo-token');
                 localStorage.setItem('farmerId', '1');
                 navigate('/dashboard');
             } else {
-                setError('Verification failed. Try 123456 for demo.');
+                setError(`Verification failed. Try ${expectedOtp} for demo.`);
             }
         } finally {
             setLoading(false);
@@ -104,6 +101,13 @@ const OTPVerification = () => {
                     </div>
                     <h1 className="text-2xl font-bold text-gray-900 mb-2">Verify OTP</h1>
                     <p className="text-gray-500">Enter the code sent to +91 {phone}</p>
+                    {location.state?.fakeOtp && (
+                        <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-xl">
+                            <p className="text-sm text-yellow-800 font-bold">
+                                Your Verification Code: <span className="text-lg underline tracking-widest">{location.state.fakeOtp}</span>
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 <div className="flex gap-2 mb-8">
