@@ -75,5 +75,47 @@
         "today": "Today",
         "read": "Read",
         "inputPlaceholder": "Ask about pests, weather..."
+    },
+    "dashboard": {
+        "title": "Kisan Sahayak",
+        "greeting": "Namaste, Rajesh Ji",
+        "askAi": "Ask AI Assistant",
+        "talkInLang": "Talk in your language (अपनी भाषा में पूछें)",
+        "tapToTalk": "Tap to Talk / बोलकर पूछें",
+        "quickServices": "Quick Services",
+        "services": {
+            "cropHealth": "Crop Health",
+            "checkPests": "Check plants for pests",
+            "weather": "Weather",
+            "weatherAlerts": "Rain & harvest alerts",
+            "mandiRates": "Mandi Rates",
+            "marketPrices": "Latest market prices"
+        },
+        "expertTip": "Expert Tip",
+        "tipTitle": "Best time for Wheat Sowing",
+        "tipDesc": "Temperature is ideal this week. Start sowing by Wednesday for best yield.",
+        "nav": {
+            "home": "Home",
+            "myFarm": "My Farm",
+            "community": "Community",
+            "profile": "Profile"
+        }
+    },
+    "myCrops": {
+        "title": "My Crops",
+        "healthy": "HEALTHY",
+        "warning": "WARNING",
+        "critical": "CRITICAL",
+        "sown": "Sown {{count}} days ago",
+        "sownSimple": "Sown {{date}}",
+        "seedling": "Seedling",
+        "growthPhase": "Growth Phase",
+        "maturing": "Maturing",
+        "nextStep": "NEXT STEP",
+        "addFertilizer": "Add Fertilizer",
+        "waterNow": "Water Now",
+        "checkPests": "Check Pests",
+        "doItNow": "Do It Now",
+        "consultAi": "Consult AI"
     }
 }

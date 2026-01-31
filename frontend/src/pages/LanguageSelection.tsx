@@ -70,8 +70,8 @@ const LanguageSelection = () => {
                             transition={{ delay: index * 0.05 }}
                             onClick={() => handleLanguageSelect(lang.code)}
                             className={`w-full p-4 rounded-full flex items-center justify-between transition-all duration-200 ${selectedLang === lang.code
-                                    ? 'bg-[#22C522] shadow-lg shadow-green-500/20 scale-[1.02]'
-                                    : 'bg-white hover:bg-gray-100 border border-transparent'
+                                ? 'bg-[#22C522] shadow-lg shadow-green-500/20 scale-[1.02]'
+                                : 'bg-white hover:bg-gray-100 border border-transparent'
                                 }`}
                         >
                             <div className="flex items-center gap-4">
@@ -100,7 +100,7 @@ const LanguageSelection = () => {
                         fullWidth
                         size="lg"
                         className="text-lg font-bold shadow-xl shadow-green-500/20"
-                        onClick={() => navigate('/farm-info')}
+                        onClick={() => navigate('/dashboard')}
                     >
                         {t('common.continue')} <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
