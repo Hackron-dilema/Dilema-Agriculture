@@ -1,0 +1,517 @@
+{
+  "crops": {
+    "rice": {
+      "name": "Rice",
+      "category": "cereal",
+      "base_temperature": 10.0,
+      "growing_season_days": [120, 150],
+      "water_requirement": "high",
+      "stages": {
+        "germination": {
+          "gdd_start": 0,
+          "gdd_end": 100,
+          "description": "Seed germination and emergence",
+          "critical_factors": ["soil_moisture", "temperature"],
+          "water_need": "critical",
+          "nutrient_need": "low"
+        },
+        "seedling": {
+          "gdd_start": 100,
+          "gdd_end": 350,
+          "description": "Seedling establishment and early growth",
+          "critical_factors": ["water", "nitrogen"],
+          "water_need": "high",
+          "nutrient_need": "medium"
+        },
+        "tillering": {
+          "gdd_start": 350,
+          "gdd_end": 700,
+          "description": "Tiller development and vegetative growth",
+          "critical_factors": ["nitrogen", "water"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "booting": {
+          "gdd_start": 700,
+          "gdd_end": 900,
+          "description": "Panicle development inside stem",
+          "critical_factors": ["water", "phosphorus"],
+          "water_need": "high",
+          "nutrient_need": "medium"
+        },
+        "flowering": {
+          "gdd_start": 900,
+          "gdd_end": 1100,
+          "description": "Flowering and pollination",
+          "critical_factors": ["temperature", "humidity", "water"],
+          "water_need": "critical",
+          "nutrient_need": "low",
+          "heat_sensitive": true,
+          "critical_temp_max": 35
+        },
+        "grain_filling": {
+          "gdd_start": 1100,
+          "gdd_end": 1400,
+          "description": "Grain development and filling",
+          "critical_factors": ["water", "potassium"],
+          "water_need": "high",
+          "nutrient_need": "medium"
+        },
+        "maturity": {
+          "gdd_start": 1400,
+          "gdd_end": 1600,
+          "description": "Grain maturation and drying",
+          "critical_factors": ["dry_weather"],
+          "water_need": "low",
+          "nutrient_need": "none"
+        },
+        "harvest": {
+          "gdd_start": 1600,
+          "gdd_end": 9999,
+          "description": "Ready for harvest",
+          "critical_factors": ["dry_weather"],
+          "water_need": "none",
+          "nutrient_need": "none"
+        }
+      },
+      "common_pests": ["stem_borer", "leaf_folder", "brown_planthopper"],
+      "common_diseases": ["blast", "bacterial_blight", "sheath_blight"]
+    },
+    "wheat": {
+      "name": "Wheat",
+      "category": "cereal",
+      "base_temperature": 4.5,
+      "growing_season_days": [110, 130],
+      "water_requirement": "medium",
+      "stages": {
+        "germination": {
+          "gdd_start": 0,
+          "gdd_end": 120,
+          "description": "Seed germination and emergence",
+          "critical_factors": ["soil_moisture", "temperature"],
+          "water_need": "medium",
+          "nutrient_need": "low"
+        },
+        "seedling": {
+          "gdd_start": 120,
+          "gdd_end": 400,
+          "description": "Seedling establishment",
+          "critical_factors": ["water", "nitrogen"],
+          "water_need": "medium",
+          "nutrient_need": "medium"
+        },
+        "tillering": {
+          "gdd_start": 400,
+          "gdd_end": 800,
+          "description": "Tiller development",
+          "critical_factors": ["nitrogen", "temperature"],
+          "water_need": "medium",
+          "nutrient_need": "high"
+        },
+        "jointing": {
+          "gdd_start": 800,
+          "gdd_end": 1100,
+          "description": "Stem elongation",
+          "critical_factors": ["water", "nutrients"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "booting": {
+          "gdd_start": 1100,
+          "gdd_end": 1300,
+          "description": "Head development inside stem",
+          "critical_factors": ["water"],
+          "water_need": "high",
+          "nutrient_need": "medium"
+        },
+        "flowering": {
+          "gdd_start": 1300,
+          "gdd_end": 1500,
+          "description": "Flowering and pollination",
+          "critical_factors": ["temperature", "humidity"],
+          "water_need": "high",
+          "nutrient_need": "low",
+          "heat_sensitive": true,
+          "critical_temp_max": 30
+        },
+        "grain_filling": {
+          "gdd_start": 1500,
+          "gdd_end": 1900,
+          "description": "Grain development",
+          "critical_factors": ["water", "cool_nights"],
+          "water_need": "medium",
+          "nutrient_need": "low"
+        },
+        "maturity": {
+          "gdd_start": 1900,
+          "gdd_end": 2100,
+          "description": "Grain maturation",
+          "critical_factors": ["dry_weather"],
+          "water_need": "low",
+          "nutrient_need": "none"
+        },
+        "harvest": {
+          "gdd_start": 2100,
+          "gdd_end": 9999,
+          "description": "Ready for harvest",
+          "critical_factors": ["dry_weather"],
+          "water_need": "none",
+          "nutrient_need": "none"
+        }
+      },
+      "common_pests": ["aphids", "armyworm", "termites"],
+      "common_diseases": ["rust", "powdery_mildew", "karnal_bunt"]
+    },
+    "maize": {
+      "name": "Maize/Corn",
+      "category": "cereal",
+      "base_temperature": 10.0,
+      "growing_season_days": [90, 120],
+      "water_requirement": "high",
+      "stages": {
+        "germination": {
+          "gdd_start": 0,
+          "gdd_end": 100,
+          "description": "Seed germination and emergence",
+          "critical_factors": ["soil_moisture", "temperature"],
+          "water_need": "medium",
+          "nutrient_need": "low"
+        },
+        "seedling": {
+          "gdd_start": 100,
+          "gdd_end": 300,
+          "description": "V1-V5 leaf stages",
+          "critical_factors": ["water", "nitrogen"],
+          "water_need": "medium",
+          "nutrient_need": "medium"
+        },
+        "vegetative": {
+          "gdd_start": 300,
+          "gdd_end": 700,
+          "description": "Rapid vegetative growth",
+          "critical_factors": ["nitrogen", "water"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "tasseling": {
+          "gdd_start": 700,
+          "gdd_end": 900,
+          "description": "Tassel emergence",
+          "critical_factors": ["water", "temperature"],
+          "water_need": "critical",
+          "nutrient_need": "high",
+          "heat_sensitive": true,
+          "critical_temp_max": 35
+        },
+        "silking": {
+          "gdd_start": 900,
+          "gdd_end": 1000,
+          "description": "Silk emergence and pollination",
+          "critical_factors": ["water", "temperature", "humidity"],
+          "water_need": "critical",
+          "nutrient_need": "medium",
+          "heat_sensitive": true,
+          "critical_temp_max": 35
+        },
+        "grain_filling": {
+          "gdd_start": 1000,
+          "gdd_end": 1400,
+          "description": "Kernel development",
+          "critical_factors": ["water"],
+          "water_need": "high",
+          "nutrient_need": "medium"
+        },
+        "maturity": {
+          "gdd_start": 1400,
+          "gdd_end": 1600,
+          "description": "Grain maturation",
+          "critical_factors": ["dry_weather"],
+          "water_need": "low",
+          "nutrient_need": "none"
+        },
+        "harvest": {
+          "gdd_start": 1600,
+          "gdd_end": 9999,
+          "description": "Ready for harvest",
+          "critical_factors": ["dry_weather"],
+          "water_need": "none",
+          "nutrient_need": "none"
+        }
+      },
+      "common_pests": ["fall_armyworm", "stem_borer", "aphids"],
+      "common_diseases": ["downy_mildew", "leaf_blight", "stalk_rot"]
+    },
+    "cotton": {
+      "name": "Cotton",
+      "category": "fiber",
+      "base_temperature": 15.5,
+      "growing_season_days": [150, 180],
+      "water_requirement": "medium",
+      "stages": {
+        "germination": {
+          "gdd_start": 0,
+          "gdd_end": 100,
+          "description": "Seed germination and emergence",
+          "critical_factors": ["soil_moisture", "temperature"],
+          "water_need": "medium",
+          "nutrient_need": "low"
+        },
+        "seedling": {
+          "gdd_start": 100,
+          "gdd_end": 400,
+          "description": "Cotyledon and early leaf development",
+          "critical_factors": ["water"],
+          "water_need": "medium",
+          "nutrient_need": "medium"
+        },
+        "vegetative": {
+          "gdd_start": 400,
+          "gdd_end": 800,
+          "description": "Vegetative growth and branching",
+          "critical_factors": ["nitrogen", "water"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "squaring": {
+          "gdd_start": 800,
+          "gdd_end": 1000,
+          "description": "Square (flower bud) formation",
+          "critical_factors": ["water", "potassium"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "flowering": {
+          "gdd_start": 1000,
+          "gdd_end": 1300,
+          "description": "Flowering period",
+          "critical_factors": ["water", "temperature"],
+          "water_need": "critical",
+          "nutrient_need": "high",
+          "heat_sensitive": true,
+          "critical_temp_max": 38
+        },
+        "boll_development": {
+          "gdd_start": 1300,
+          "gdd_end": 1700,
+          "description": "Boll filling and maturation",
+          "critical_factors": ["water", "potassium"],
+          "water_need": "high",
+          "nutrient_need": "medium"
+        },
+        "boll_opening": {
+          "gdd_start": 1700,
+          "gdd_end": 2000,
+          "description": "Bolls opening for harvest",
+          "critical_factors": ["dry_weather"],
+          "water_need": "low",
+          "nutrient_need": "none"
+        },
+        "harvest": {
+          "gdd_start": 2000,
+          "gdd_end": 9999,
+          "description": "Ready for harvest",
+          "critical_factors": ["dry_weather"],
+          "water_need": "none",
+          "nutrient_need": "none"
+        }
+      },
+      "common_pests": ["bollworm", "whitefly", "aphids", "pink_bollworm"],
+      "common_diseases": ["wilt", "root_rot", "bacterial_blight"]
+    },
+    "tomato": {
+      "name": "Tomato",
+      "category": "vegetable",
+      "base_temperature": 10.0,
+      "growing_season_days": [90, 120],
+      "water_requirement": "high",
+      "stages": {
+        "germination": {
+          "gdd_start": 0,
+          "gdd_end": 80,
+          "description": "Seed germination",
+          "critical_factors": ["soil_moisture", "temperature"],
+          "water_need": "medium",
+          "nutrient_need": "low"
+        },
+        "seedling": {
+          "gdd_start": 80,
+          "gdd_end": 250,
+          "description": "Seedling growth",
+          "critical_factors": ["water", "nitrogen"],
+          "water_need": "medium",
+          "nutrient_need": "medium"
+        },
+        "vegetative": {
+          "gdd_start": 250,
+          "gdd_end": 500,
+          "description": "Vegetative growth",
+          "critical_factors": ["nitrogen", "water"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "flowering": {
+          "gdd_start": 500,
+          "gdd_end": 700,
+          "description": "Flowering period",
+          "critical_factors": ["temperature", "calcium"],
+          "water_need": "high",
+          "nutrient_need": "high",
+          "heat_sensitive": true,
+          "critical_temp_max": 32
+        },
+        "fruiting": {
+          "gdd_start": 700,
+          "gdd_end": 1000,
+          "description": "Fruit development",
+          "critical_factors": ["water", "potassium", "calcium"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "maturity": {
+          "gdd_start": 1000,
+          "gdd_end": 1200,
+          "description": "Fruit ripening",
+          "critical_factors": ["consistent_water"],
+          "water_need": "medium",
+          "nutrient_need": "low"
+        },
+        "harvest": {
+          "gdd_start": 1200,
+          "gdd_end": 9999,
+          "description": "Continuous harvest",
+          "critical_factors": [],
+          "water_need": "medium",
+          "nutrient_need": "low"
+        }
+      },
+      "common_pests": ["fruit_borer", "whitefly", "leaf_miner", "spider_mites"],
+      "common_diseases": ["early_blight", "late_blight", "bacterial_wilt", "mosaic_virus"]
+    },
+    "onion": {
+      "name": "Onion",
+      "category": "vegetable",
+      "base_temperature": 5.0,
+      "growing_season_days": [100, 140],
+      "water_requirement": "medium",
+      "stages": {
+        "germination": {
+          "gdd_start": 0,
+          "gdd_end": 100,
+          "description": "Seed germination",
+          "critical_factors": ["soil_moisture"],
+          "water_need": "medium",
+          "nutrient_need": "low"
+        },
+        "seedling": {
+          "gdd_start": 100,
+          "gdd_end": 300,
+          "description": "Flag leaf stage",
+          "critical_factors": ["water", "nitrogen"],
+          "water_need": "medium",
+          "nutrient_need": "medium"
+        },
+        "vegetative": {
+          "gdd_start": 300,
+          "gdd_end": 700,
+          "description": "Leaf development",
+          "critical_factors": ["nitrogen", "water"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "bulbing": {
+          "gdd_start": 700,
+          "gdd_end": 1000,
+          "description": "Bulb initiation and development",
+          "critical_factors": ["daylength", "potassium"],
+          "water_need": "high",
+          "nutrient_need": "high"
+        },
+        "bulb_filling": {
+          "gdd_start": 1000,
+          "gdd_end": 1300,
+          "description": "Bulb expansion",
+          "critical_factors": ["water", "potassium"],
+          "water_need": "high",
+          "nutrient_need": "medium"
+        },
+        "maturity": {
+          "gdd_start": 1300,
+          "gdd_end": 1500,
+          "description": "Neck fall and curing",
+          "critical_factors": ["dry_weather"],
+          "water_need": "low",
+          "nutrient_need": "none"
+        },
+        "harvest": {
+          "gdd_start": 1500,
+          "gdd_end": 9999,
+          "description": "Ready for harvest",
+          "critical_factors": ["dry_weather"],
+          "water_need": "none",
+          "nutrient_need": "none"
+        }
+      },
+      "common_pests": ["thrips", "onion_maggot", "cutworm"],
+      "common_diseases": ["purple_blotch", "downy_mildew", "neck_rot"]
+    }
+  },
+  "risk_rules": [
+    {
+      "id": "flowering_heat",
+      "condition": "stage == 'flowering' AND temp_max > critical_temp_max",
+      "severity": "high",
+      "message": "Critical: Heat stress during flowering can cause poor pollination and reduced yield",
+      "action": "Consider irrigation during hottest part of day for cooling effect"
+    },
+    {
+      "id": "flowering_rain",
+      "condition": "stage == 'flowering' AND precipitation_probability > 70",
+      "severity": "medium",
+      "message": "Rain during flowering may affect pollination in some crops",
+      "action": "Monitor closely for disease development after rain"
+    },
+    {
+      "id": "maturity_rain",
+      "condition": "stage == 'maturity' AND precipitation_sum > 20",
+      "severity": "high",
+      "message": "Heavy rain during maturity can cause grain damage and fungal issues",
+      "action": "Consider early harvest if crop is ready"
+    },
+    {
+      "id": "seedling_frost",
+      "condition": "stage == 'seedling' AND temp_min < 5",
+      "severity": "high",
+      "message": "Frost risk to young seedlings",
+      "action": "Provide protective covering if possible"
+    },
+    {
+      "id": "vegetative_drought",
+      "condition": "stage == 'vegetative' AND days_without_rain > 7 AND irrigation_type == 'rainfed'",
+      "severity": "medium",
+      "message": "Drought stress may limit vegetative growth",
+      "action": "Irrigate if possible, or prepare for delayed growth"
+    },
+    {
+      "id": "grain_filling_heat",
+      "condition": "stage == 'grain_filling' AND temp_max > 35",
+      "severity": "medium",
+      "message": "Heat stress can reduce grain weight and quality",
+      "action": "Ensure adequate irrigation to mitigate heat stress"
+    }
+  ],
+  "general_advisories": {
+    "spray_conditions": {
+      "wind_speed_max": 15,
+      "rain_probability_max": 30,
+      "temp_min": 10,
+      "temp_max": 35,
+      "humidity_min": 30,
+      "humidity_max": 90
+    },
+    "irrigation_triggers": {
+      "days_without_rain": 5,
+      "high_temp_threshold": 30,
+      "low_humidity_threshold": 40
+    }
+  }
+}
