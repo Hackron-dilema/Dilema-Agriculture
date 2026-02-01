@@ -1,165 +1,123 @@
-# AI-Driven Agricultural Decision Support System
+# 🌾 Digital Dilemma: Agricultural Decision Support System
 
-A production-grade, open-source, multi-agent system that provides context-aware, data-backed farming advice to farmers through a chat-first interface.
+A production-grade, multi-agent AI system that provides context-aware, data-backed farming advice through a conversational, human-centric interface. Available in multiple regional languages.
 
-![Version](https://img.shields.io/badge/version-1.0.0-green)
+![Version](https://img.shields.io/badge/version-1.1.0-green)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
+![React](https://img.shields.io/badge/react-18.x-blue)
 
-## 🌾 Features
+---
 
-- **Multi-Agent System**: 6 specialized agents working together
-  - Weather Intelligence Agent (Open-Meteo integration)
-  - Crop Stage Prediction Agent (GDD-based)
-  - Risk Assessment Agent (threat detection)
-  - Context Agent (farm state memory)
-  - Conversational LLM Agent (intent extraction)
-  - Decision Orchestrator (deterministic routing)
+## ✨ Key Features
 
-- **Chat-First Interface**: Natural language interaction
-- **No Paid APIs**: Uses Open-Meteo (free, no API key)
-- **LLM Never Decides Alone**: All decisions are data-backed
-- **Explainable Advice**: Every recommendation includes reasoning
+- **🧠 Multi-Agent Orchestration**: 6 specialized agents working in sync:
+  - **Weather Agent**: Real-time localized weather via Open-Meteo.
+  - **Crop Stage Agent**: GDD-based growth tracking and stage prediction.
+  - **Risk Agent**: Intelligent threat detection (pest, disease, heat stress).
+  - **Context Agent**: Memory and profile-aware advisory.
+  - **Conversational Expert**: Refined AI persona that talks like a human, not a robot.
+  - **Decision Orchestrator**: Rule-based logic ensures the AI never hallucinates advice.
 
-## 🚀 Quick Start
+- **💬 Conversational Interface**: Person-to-person chat style with emoji-rich, concise, and helpful responses 🎙️.
+- **🌍 Multi-Lingual Support**: Seamlessly switch between English, Hindi, Marathi, and more.
+- **☁️ Cloud LLM (Groq)**: Blazing fast responses using Groq's Llama 3 infrastructure.
+- **📱 Mobile-First Design**: Modern, glassmorphic UI built for the farmer's field.
 
-### Prerequisites
-- Python 3.10+
-- Node.js (optional, for serving frontend)
+---
 
-### Backend Setup
+## 🛠️ Tech Stack
+
+- **Frontend**: React 18, Vite, TailwindCSS, Lucide Icons, i18next.
+- **Backend**: FastAPI (Python), SQLAlchemy (Async), Pydantic v2.
+- **Database**: SQLite (Async) for edge-ready performance.
+- **LLM**: Groq API (Primary) / Ollama (Local Fallback).
+- **APIs**: Open-Meteo (Weather), Custom GDD Algorithms.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Backend Setup
 
 ```bash
 cd backend
 
-# Create virtual environment
+# Create & activate virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the server
-uvicorn app.main:app --reload --port 8000
+# Configure Environment
+cp .env.example .env
+# Update .env with your GROQ_API_KEY
 ```
 
-### Frontend Setup
-
-Open `frontend/index.html` in a browser, or serve with:
+### 2. Frontend Setup
 
 ```bash
 cd frontend
-python -m http.server 3000
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-Then open http://localhost:3000
+### 3. Run the App
+- **Backend**: `uvicorn app.main:app --reload --port 8000`
+- **Frontend**: Open `http://localhost:5174` (or the port Vite provides)
 
-## 📱 User Flow
+---
 
-1. **Language Selection** - Choose preferred language
-2. **Phone Login** - OTP-based authentication (use 123456 for demo)
-3. **Location** - GPS or manual entry
-4. **Farm Setup** - Land size, irrigation type, crop, sowing date
-5. **Chat Interface** - Ask questions, get advice
+## 🏗️ System Architecture
 
-## 🏗️ Architecture
-
+```mermaid
+graph TD
+    User-->Frontend[React Mobile UI]
+    Frontend-->Backend[FastAPI Server]
+    Backend-->Orchestrator[Decision Orchestrator]
+    Orchestrator-->Weather[Weather Agent]
+    Orchestrator-->Crop[Crop Stage Agent]
+    Orchestrator-->Risk[Risk Agent]
+    Orchestrator-->LLM[Conversational LLM - Groq]
+    Weather-->OpenMeteo[Open-Meteo API]
+    LLM-->Farmer[Personalized Advice]
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Chat Interface                           │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    FastAPI Backend                          │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │              Decision Orchestrator                    │  │
-│  │         (Deterministic Routing & Logic)              │  │
-│  └──────────────────────────────────────────────────────┘  │
-│        │           │           │           │               │
-│        ▼           ▼           ▼           ▼               │
-│   ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐         │
-│   │ Weather │ │  Crop   │ │  Risk   │ │ Context │         │
-│   │  Agent  │ │  Stage  │ │  Agent  │ │  Agent  │         │
-│   └─────────┘ └─────────┘ └─────────┘ └─────────┘         │
-└─────────────────────────────────────────────────────────────┘
-        │                                     │
-        ▼                                     ▼
-┌──────────────┐                    ┌──────────────┐
-│  Open-Meteo  │                    │   SQLite DB  │
-│  Weather API │                    │              │
-└──────────────┘                    └──────────────┘
-```
+
+---
 
 ## 📁 Project Structure
 
-```
+```text
 Dilema-Agriculture/
 ├── backend/
 │   ├── app/
-│   │   ├── main.py           # FastAPI application
-│   │   ├── agents.py         # 6 MVP agents
-│   │   ├── models.py         # Database models
-│   │   ├── database.py       # SQLite setup
-│   │   ├── auth.py           # JWT + OTP auth
-│   │   ├── routers/
-│   │   │   ├── auth.py       # Auth endpoints
-│   │   │   ├── profile.py    # Onboarding endpoints
-│   │   │   └── interaction.py # Chat endpoints
-│   │   └── utils/
-│   │       ├── weather.py    # Open-Meteo integration
-│   │       ├── gdd.py        # GDD calculator
-│   │       └── crop_data.py  # Crop knowledge base
-│   ├── data/
-│   │   └── crops.json        # Crop stages & rules
-│   └── requirements.txt
+│   │   ├── agents.py         # Multi-agent logic
+│   │   ├── llm_service.py    # Groq/Ollama integration
+│   │   ├── models.py         # DB & Pydantic models
+│   │   └── routers/          # Auth, Profile, Chat endpoints
+│   └── .env                  # Configuration
 ├── frontend/
-│   ├── index.html            # Main app (onboarding + chat)
-│   ├── css/style.css         # Mobile-first styling
-│   └── js/app.js             # Frontend logic
-└── docs/
-    ├── architecture.md
-    └── api_endpoints.md
+│   ├── src/
+│   │   ├── pages/            # Dashboard, Chat, Profile
+│   │   ├── components/       # Layouts & Nav
+│   │   └── services/         # Axios API clients
+│   └── package.json
+└── references/               # Legacy files and design docs
 ```
 
-## 🔌 API Endpoints
+---
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/request-otp` | Request OTP |
-| POST | `/api/auth/verify-otp` | Verify OTP & get token |
-| POST | `/api/profile/onboard` | Complete onboarding |
-| GET | `/api/profile/me` | Get current farmer |
-| POST | `/api/chat` | Send chat message |
-| GET | `/api/weather/{farmer_id}` | Get weather data |
-| GET | `/api/crop-status/{farmer_id}` | Get crop status |
+## 📸 Screenshots
 
-## 🌱 Supported Crops
+![AI Chat Assistant](/Users/thrishul/.gemini/antigravity/brain/a80a9257-6a91-4d07-9ed9-6202608f4f91/ai_chat_interaction_final_1769902600529.png)
 
-- Rice, Wheat, Maize/Corn
-- Cotton
-- Tomato, Onion
+---
 
-## 📋 Core Design Principles
+## 📄 License & Credits
 
-1. **LLM Never Decides Alone** - All decisions are data-backed
-2. **Deterministic Orchestration** - No LLM logic in decision making
-3. **Agents Are Isolated** - Communication only via Orchestrator
-4. **Structured Outputs** - All agents return JSON with confidence scores
-5. **Explainable** - Every recommendation includes reasoning
-6. **No Paid APIs** - Uses only free services
-
-## 🧪 Testing
-
-```bash
-cd backend
-python -m pytest tests/ -v
-```
-
-## 📄 License
-
-MIT License - see LICENSE file
-
-## 🤝 Contributing
-
-Contributions welcome! Please read CONTRIBUTING.md first.
+Distributed under the MIT License. Built with ❤️ for the global farming community.
