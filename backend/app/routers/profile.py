@@ -111,6 +111,10 @@ class LanguageCode(str, Enum):
     KANNADA = "kn"
     TAMIL = "ta"
     MARATHI = "mr"
+    PUNJABI = "pa"
+    GUJARATI = "gu"
+    BENGALI = "bn"
+    MALAYALAM = "ml"
 
 class BasicOnboardingRequest(BaseModel):
     """Basic onboarding - without crop data (AI will ask)."""
@@ -159,6 +163,26 @@ async def basic_onboarding(
         if request.name:
             existing_farmer.name = request.name
         
+        # Update or create farm
+        result = await db.execute(
+            select(FarmDB).where(FarmDB.farmer_id == existing_farmer.id)
+        )
+        existing_farm = result.scalar_one_or_none()
+        
+        if existing_farm:
+            if request.land_size_acres:
+                existing_farm.land_size_acres = request.land_size_acres
+            if request.irrigation_type:
+                existing_farm.irrigation_type = request.irrigation_type
+        elif request.land_size_acres or request.irrigation_type:
+            new_farm = FarmDB(
+                farmer_id=existing_farmer.id,
+                name="My Farm",
+                land_size_acres=request.land_size_acres or 1.0,
+                irrigation_type=request.irrigation_type or "rainfed"
+            )
+            db.add(new_farm)
+        
         await db.commit()
         await db.refresh(existing_farmer)
         
@@ -184,6 +208,17 @@ async def basic_onboarding(
         location_name=request.location_name
     )
     db.add(farmer)
+    await db.flush()  # Get farmer ID
+    
+    # Create farm with land size and water source
+    farm = FarmDB(
+        farmer_id=farmer.id,
+        name="My Farm",
+        land_size_acres=request.land_size_acres or 1.0,
+        irrigation_type=request.irrigation_type or "rainfed"
+    )
+    db.add(farm)
+    
     await db.commit()
     await db.refresh(farmer)
     

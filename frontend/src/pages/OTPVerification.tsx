@@ -61,9 +61,10 @@ const OTPVerification = () => {
             const response = await authService.verifyOtp(phone, otpString);
             if (response.access_token) {
                 localStorage.setItem('token', response.access_token);
+                localStorage.setItem('phone', `+91${phone}`);
                 if (response.farmer_id) localStorage.setItem('farmerId', response.farmer_id.toString());
 
-                if (response.is_new_user) {
+                if (response.is_new_user || !response.farmer_id) {
                     navigate('/farm-info');
                 } else {
                     navigate('/dashboard');
@@ -75,9 +76,11 @@ const OTPVerification = () => {
             console.error(err);
             const expectedOtp = location.state?.fakeOtp || '123456';
             if (otpString === expectedOtp) {
+                // Demo mode: store phone and navigate to farm-info for proper onboarding
                 localStorage.setItem('token', 'demo-token');
-                localStorage.setItem('farmerId', '1');
-                navigate('/dashboard');
+                localStorage.setItem('phone', `+91${phone}`);
+                // Don't set fake farmerId - user needs to complete onboarding
+                navigate('/farm-info');
             } else {
                 setError(`Verification failed. Try ${expectedOtp} for demo.`);
             }
@@ -95,20 +98,25 @@ const OTPVerification = () => {
             </header>
 
             <div className="flex-1 flex flex-col items-center">
-                <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <CheckCircle2 className="w-8 h-8 text-blue-600" />
-                    </div>
-                    <h1 className="text-2xl font-bold text-gray-900 mb-2">Verify OTP</h1>
-                    <p className="text-gray-500">Enter the code sent to +91 {phone}</p>
-                    {location.state?.fakeOtp && (
-                        <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-xl">
-                            <p className="text-sm text-yellow-800 font-bold">
-                                Your Verification Code: <span className="text-lg underline tracking-widest">{location.state.fakeOtp}</span>
+            </div>
+
+            {location.state?.fakeOtp && (
+                <div className="fixed top-4 left-4 right-4 animate-in slide-in-from-top-4 duration-500 z-50">
+                    <div className="bg-white/95 backdrop-blur-md shadow-2xl rounded-2xl p-4 border border-green-100 flex items-center gap-4">
+                        <div className="bg-green-100 p-2 rounded-xl">
+                            <div className="w-8 h-8 flex items-center justify-center text-2xl">💬</div>
+                        </div>
+                        <div className="flex-1">
+                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Messages • Now</p>
+                            <p className="font-medium text-gray-900">
+                                Your verification code is <span className="font-bold text-black text-lg">{location.state.fakeOtp}</span>
                             </p>
                         </div>
-                    )}
+                    </div>
                 </div>
+            )}
+
+            <div className="text-center mb-8">
 
                 <div className="flex gap-2 mb-8">
                     {otp.map((digit, index) => (

@@ -1,0 +1,234 @@
+INFO:     Will watch for changes in these directories: ['/Users/karthikeya/Desktop/Dilema-Agriculture/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [50703] using WatchFiles
+INFO:     Started server process [50764]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Database initialized
+🌾 Agricultural Decision Support System ready!
+INFO:     127.0.0.1:60556 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60556 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60553 - "GET /api/crop-status/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60555 - "GET /api/weather/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60553 - "GET /api/crop-status/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60555 - "GET /api/weather/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /api/history/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /api/history/1 HTTP/1.1" 200 OK
+[ORCHESTRATOR] Processing query for farmer 1: 'ఇలాంటి పురుగులు నా పొలంలో చాలా ఉన్నాయి నేనేం చేయాల...'
+[ORCHESTRATOR] Image detected - analyzing...
+[ORCHESTRATOR] Image analysis result: Image analysis requires vision model (mock response: looks like corn with leaf blight)....
+[ORCHESTRATOR] Intent detected: pest_disease_query (confidence: 0.9)
+[ORCHESTRATOR] Context loaded: has_location=True, has_crop=True
+[ORCHESTRATOR] Required: ['crop_type', 'sowing_date', 'symptom_description'] | Missing: []
+[ORCHESTRATOR] Context complete - calling agents in order
+[ORCHESTRATOR] Calling Weather Agent...
+[ORCHESTRATOR] Weather Agent returned: temp=17.3°C
+[ORCHESTRATOR] Calling Crop Stage Agent...
+[ORCHESTRATOR] Crop Stage Agent returned: stage=None
+[ORCHESTRATOR] Calling Risk Agent...
+[ORCHESTRATOR] Risk Agent returned: risk_level=low
+[ORCHESTRATOR] Applying deterministic decision rules...
+[ORCHESTRATOR] Decision made: For pest/disease issues, describe symptoms or upload a photo. Common issues for this stage are being...
+[ORCHESTRATOR] Response generated successfully
+INFO:     127.0.0.1:60568 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60582 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60582 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60581 - "GET /api/weather/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60578 - "GET /api/crop-status/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60578 - "GET /api/crop-status/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60581 - "GET /api/weather/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60604 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60611 - "GET /api/history/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60611 - "GET /api/history/1 HTTP/1.1" 200 OK
+[ORCHESTRATOR] Processing query for farmer 1: 'ఏం పీకుతున్నావ్...'
+[ORCHESTRATOR] Intent detected: general_farming (confidence: 0.8)
+[ORCHESTRATOR] Context loaded: has_location=True, has_crop=True
+[ORCHESTRATOR] Required: [] | Missing: []
+[ORCHESTRATOR] Context complete - calling agents in order
+[ORCHESTRATOR] Calling Weather Agent...
+[ORCHESTRATOR] Weather Agent returned: temp=17.3°C
+[ORCHESTRATOR] Calling Crop Stage Agent...
+[ORCHESTRATOR] Crop Stage Agent returned: stage=None
+[ORCHESTRATOR] Calling Risk Agent...
+[ORCHESTRATOR] Risk Agent returned: risk_level=low
+[ORCHESTRATOR] Applying deterministic decision rules...
+[ORCHESTRATOR] Decision made: Your crop is progressing well. Keep monitoring....
+[ORCHESTRATOR] Response generated successfully
+INFO:     127.0.0.1:60615 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60662 - "OPTIONS /api/auth/request-otp HTTP/1.1" 200 OK
+
+[OTP SERVICE] ===================================
+[OTP SERVICE] OTP for +919988776655: 069786
+[OTP SERVICE] ===================================
+
+INFO:     127.0.0.1:60662 - "POST /api/auth/request-otp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60666 - "OPTIONS /api/auth/verify-otp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60666 - "POST /api/auth/verify-otp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60691 - "OPTIONS /api/profile/basic-onboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60691 - "POST /api/profile/basic-onboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60691 - "OPTIONS /api/crop-status/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60694 - "OPTIONS /api/weather/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60696 - "OPTIONS /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60700 - "OPTIONS /api/crop-status/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60691 - "OPTIONS /api/weather/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60701 - "OPTIONS /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60696 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60696 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60694 - "GET /api/weather/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60702 - "GET /api/crop-status/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60702 - "GET /api/crop-status/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60694 - "GET /api/weather/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60710 - "OPTIONS /api/history/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60711 - "OPTIONS /api/history/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60710 - "GET /api/history/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60711 - "OPTIONS /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60710 - "GET /api/history/10 HTTP/1.1" 200 OK
+[ORCHESTRATOR] Processing query for farmer 10: 'hello...'
+[ORCHESTRATOR] Processing query for farmer 10: 'hello...'
+[ORCHESTRATOR] Intent detected: greeting (confidence: 1.0)
+[ORCHESTRATOR] Context loaded: has_location=True, has_crop=False
+[ORCHESTRATOR] Required: [] | Missing: []
+[ORCHESTRATOR] Context complete - calling agents in order
+[ORCHESTRATOR] Calling Weather Agent...
+[ORCHESTRATOR] Weather Agent returned: temp=18.2°C
+[ORCHESTRATOR] Calling Crop Stage Agent...
+[ORCHESTRATOR] Crop Stage Agent skipped - no crop data
+[ORCHESTRATOR] Calling Risk Agent...
+[ORCHESTRATOR] Risk Agent skipped - no crop stage data
+[ORCHESTRATOR] Applying deterministic decision rules...
+[ORCHESTRATOR] Decision made: Your crop is progressing well. Keep monitoring....
+[ORCHESTRATOR] Response generated successfully
+INFO:     127.0.0.1:60713 - "POST /api/chat HTTP/1.1" 200 OK
+[ORCHESTRATOR] Intent detected: greeting (confidence: 1.0)
+[ORCHESTRATOR] Context loaded: has_location=True, has_crop=False
+[ORCHESTRATOR] Required: [] | Missing: []
+[ORCHESTRATOR] Context complete - calling agents in order
+[ORCHESTRATOR] Calling Weather Agent...
+[ORCHESTRATOR] Weather Agent returned: temp=18.2°C
+[ORCHESTRATOR] Calling Crop Stage Agent...
+[ORCHESTRATOR] Crop Stage Agent skipped - no crop data
+[ORCHESTRATOR] Calling Risk Agent...
+[ORCHESTRATOR] Risk Agent skipped - no crop stage data
+[ORCHESTRATOR] Applying deterministic decision rules...
+[ORCHESTRATOR] Decision made: Your crop is progressing well. Keep monitoring....
+[ORCHESTRATOR] Response generated successfully
+INFO:     127.0.0.1:60710 - "POST /api/chat HTTP/1.1" 200 OK
+[ORCHESTRATOR] Processing query for farmer 10: 'Hello...'
+[ORCHESTRATOR] Intent detected: greeting (confidence: 1.0)
+[ORCHESTRATOR] Context loaded: has_location=True, has_crop=False
+[ORCHESTRATOR] Required: [] | Missing: []
+[ORCHESTRATOR] Context complete - calling agents in order
+[ORCHESTRATOR] Calling Weather Agent...
+[ORCHESTRATOR] Weather Agent returned: temp=18.2°C
+[ORCHESTRATOR] Calling Crop Stage Agent...
+[ORCHESTRATOR] Crop Stage Agent skipped - no crop data
+[ORCHESTRATOR] Calling Risk Agent...
+[ORCHESTRATOR] Risk Agent skipped - no crop stage data
+[ORCHESTRATOR] Applying deterministic decision rules...
+[ORCHESTRATOR] Decision made: Your crop is progressing well. Keep monitoring....
+[ORCHESTRATOR] Response generated successfully
+INFO:     127.0.0.1:60723 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60736 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60736 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60735 - "GET /api/weather/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60733 - "GET /api/crop-status/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60733 - "GET /api/crop-status/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60735 - "GET /api/weather/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "OPTIONS /api/profile/farmer/10/crops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60747 - "OPTIONS /api/profile/farmer/10/crops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60744 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "GET /api/profile/farmer/10/crops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60744 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "GET /api/profile/farmer/10/crops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "POST /api/profile/basic-onboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60745 - "POST /api/profile/basic-onboard HTTP/1.1" 200 OK
+
+[OTP SERVICE] ===================================
+[OTP SERVICE] OTP for +911234567890: 974896
+[OTP SERVICE] ===================================
+
+INFO:     127.0.0.1:60749 - "POST /api/auth/request-otp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60770 - "POST /api/auth/verify-otp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60770 - "OPTIONS /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60773 - "OPTIONS /api/weather/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60777 - "OPTIONS /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60770 - "OPTIONS /api/weather/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60775 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60775 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60773 - "GET /api/weather/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60778 - "GET /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60773 - "GET /api/weather/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60778 - "GET /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60778 - "GET /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60778 - "GET /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60773 - "OPTIONS /api/profile/farmer/2/crops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60780 - "OPTIONS /api/profile/farmer/2/crops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60778 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60778 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60773 - "GET /api/profile/farmer/2/crops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60773 - "GET /api/profile/farmer/2/crops HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60773 - "POST /api/profile/basic-onboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60773 - "POST /api/profile/basic-onboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60877 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60877 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60874 - "GET /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60876 - "GET /api/weather/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60876 - "GET /api/weather/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60874 - "GET /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60885 - "OPTIONS /api/history/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60887 - "OPTIONS /api/history/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60885 - "GET /api/history/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60887 - "GET /api/history/2 HTTP/1.1" 200 OK
+[ORCHESTRATOR] Processing query for farmer 2: 'hello...'
+[ORCHESTRATOR] Intent detected: greeting (confidence: 1.0)
+[ORCHESTRATOR] Context loaded: has_location=True, has_crop=True
+[ORCHESTRATOR] Required: [] | Missing: []
+[ORCHESTRATOR] Context complete - calling agents in order
+[ORCHESTRATOR] Calling Weather Agent...
+[ORCHESTRATOR] Weather Agent returned: temp=18.2°C
+[ORCHESTRATOR] Calling Crop Stage Agent...
+[ORCHESTRATOR] Crop Stage Agent returned: stage=None
+[ORCHESTRATOR] Calling Risk Agent...
+[ORCHESTRATOR] Risk Agent returned: risk_level=low
+[ORCHESTRATOR] Applying deterministic decision rules...
+[ORCHESTRATOR] Decision made: Your crop is progressing well. Keep monitoring....
+[ORCHESTRATOR] Response generated successfully
+INFO:     127.0.0.1:60889 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60904 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60904 - "GET /api/profile/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60902 - "GET /api/weather/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60901 - "GET /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60902 - "GET /api/crop-status/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60901 - "GET /api/weather/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60910 - "GET /api/history/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60910 - "GET /api/history/2 HTTP/1.1" 200 OK
+[ORCHESTRATOR] Processing query for farmer 2: 'hello...'
+[ORCHESTRATOR] Intent detected: greeting (confidence: 1.0)
+[ORCHESTRATOR] Context loaded: has_location=True, has_crop=True
+[ORCHESTRATOR] Required: [] | Missing: []
+[ORCHESTRATOR] Context complete - calling agents in order
+[ORCHESTRATOR] Calling Weather Agent...
+[ORCHESTRATOR] Weather Agent returned: temp=18.2°C
+[ORCHESTRATOR] Calling Crop Stage Agent...
+[ORCHESTRATOR] Crop Stage Agent returned: stage=None
+[ORCHESTRATOR] Calling Risk Agent...
+[ORCHESTRATOR] Risk Agent returned: risk_level=low
+[ORCHESTRATOR] Applying deterministic decision rules...
+[ORCHESTRATOR] Decision made: Your crop is progressing well. Keep monitoring....
+[ORCHESTRATOR] Response generated successfully
+INFO:     127.0.0.1:60910 - "POST /api/chat HTTP/1.1" 200 OK
+[ORCHESTRATOR] Processing query for farmer 2: 'i am cultivating sugarcane and now i want to harve...'
+[ORCHESTRATOR] Intent detected: harvest_query (confidence: 1.0)
+[ORCHESTRATOR] Context loaded: has_location=True, has_crop=True
+[ORCHESTRATOR] Required: ['crop_type', 'sowing_date'] | Missing: []
+[ORCHESTRATOR] Context complete - calling agents in order
+[ORCHESTRATOR] Calling Weather Agent...
+[ORCHESTRATOR] Weather Agent returned: temp=18.2°C
+[ORCHESTRATOR] Calling Crop Stage Agent...
+[ORCHESTRATOR] Crop Stage Agent returned: stage=None
+[ORCHESTRATOR] Calling Risk Agent...
+[ORCHESTRATOR] Risk Agent returned: risk_level=low
+[ORCHESTRATOR] Applying deterministic decision rules...
+[ORCHESTRATOR] Decision made: Crop not ready - currently in  stage....
+[ORCHESTRATOR] Response generated successfully
+INFO:     127.0.0.1:60926 - "POST /api/chat HTTP/1.1" 200 OK

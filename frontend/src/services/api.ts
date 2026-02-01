@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 // Types
 export interface AuthResponse {
@@ -103,10 +103,12 @@ export const cropService = {
 };
 
 export const chatService = {
-    sendMessage: async (content: string, farmerId: number) => {
+    sendMessage: async (content: string, farmerId: number, image?: string, language?: string) => {
         const response = await api.post('/chat', {
             content,
-            farmer_id: farmerId
+            farmer_id: farmerId,
+            image,
+            language
         });
         return response.data;
     },

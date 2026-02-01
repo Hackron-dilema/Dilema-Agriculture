@@ -21,6 +21,10 @@ class Language(str, Enum):
     KANNADA = "kn"
     TAMIL = "ta"
     MARATHI = "mr"
+    PUNJABI = "pa"
+    GUJARATI = "gu"
+    BENGALI = "bn"
+    MALAYALAM = "ml"
 
 
 class IrrigationType(str, Enum):
@@ -29,6 +33,8 @@ class IrrigationType(str, Enum):
     SPRINKLER = "sprinkler"
     FLOOD = "flood"
     CANAL = "canal"
+    TUBEWELL = "tubewell"
+    POND = "pond"
 
 
 class CropStage(str, Enum):
@@ -138,6 +144,23 @@ class ChatMessageDB(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 
+class ConversationStateDB(Base):
+    """
+    Stores conversation state for guided questioning.
+    Allows orchestrator to ask questions one at a time and resume after context is complete.
+    """
+    __tablename__ = "conversation_states"
+    
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    farmer_id: Mapped[int] = mapped_column(Integer, ForeignKey("farmers.id"), unique=True, index=True)
+    pending_intent: Mapped[str] = mapped_column(String(50))  # e.g., "crop_planning"
+    collected_context: Mapped[str] = mapped_column(Text, default="{}")  # JSON blob
+    missing_fields: Mapped[str] = mapped_column(Text, default="[]")  # JSON array
+    current_question_field: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)  # Field being asked
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
 # ============== PYDANTIC SCHEMAS ==============
 
 class FarmerCreate(BaseModel):
@@ -208,9 +231,11 @@ class OnboardingRequest(BaseModel):
 
 
 class ChatMessage(BaseModel):
-    """Schema for chat message."""
+    """Message from user."""
     content: str
-    farmer_id: int
+    farmer_id: Optional[int] = None
+    image: Optional[str] = None  # Base64 string
+    language: Optional[str] = None  # Language code (en, te, hi, etc.)
 
 
 class ChatResponse(BaseModel):

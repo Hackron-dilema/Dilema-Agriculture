@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MobileContainer } from '../components/layout/MobileContainer';
-import { ChevronLeft, Languages, Volume2, Mic, Camera, Send, Lightbulb, Square } from 'lucide-react';
+import { ChevronLeft, Languages, Volume2, Mic, Camera, Send, Lightbulb, Square, X } from 'lucide-react';
 import { chatService } from '../services/api';
 
 
@@ -20,26 +20,31 @@ interface Message {
 const ChatAssistant = () => {
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
-    const [messages, setMessages] = useState<Message[]>([
-        {
-            id: 1,
-            text: t('chat.welcome', "Namaste! I am your AgriAI Assistant. How can I help you today?"),
-            sender: 'ai'
-        }
-    ]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [inputValue, setInputValue] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isListening, setIsListening] = useState(false);
     const recognitionRef = useRef<any>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-    // Load chat history on mount
+    // Load chat history or fetch initial greeting on mount
     useEffect(() => {
-        const loadHistory = async () => {
+        const initializeChat = async () => {
             try {
                 const farmerId = localStorage.getItem('farmerId');
-                if (!farmerId) return;
+                if (!farmerId) {
+                    // No farmer ID, show default welcome
+                    setMessages([{
+                        id: 1,
+                        text: t('chat.welcome', "Hello! Please complete your profile to get started."),
+                        sender: 'ai'
+                    }]);
+                    return;
+                }
 
+                // Try to load chat history
                 const data = await chatService.getHistory(parseInt(farmerId));
                 if (data.messages && data.messages.length > 0) {
                     const historyMessages: Message[] = data.messages.map((msg: any, index: number) => ({
@@ -48,12 +53,30 @@ const ChatAssistant = () => {
                         sender: msg.role === 'assistant' ? 'ai' : 'user'
                     }));
                     setMessages(historyMessages);
+                } else {
+                    // No history - fetch initial greeting from backend
+                    // This will return appropriate message based on whether user has crops or not
+                    const response = await chatService.sendMessage("hello", parseInt(farmerId));
+                    setMessages([{
+                        id: 1,
+                        text: response.response,
+                        sender: 'ai',
+                        confidence: response.confidence,
+                        reasoning: response.reasoning,
+                        data_sources: response.data_sources
+                    }]);
                 }
             } catch (error) {
-                console.error('Failed to load chat history:', error);
+                console.error('Failed to initialize chat:', error);
+                // Fallback greeting
+                setMessages([{
+                    id: 1,
+                    text: t('chat.welcome', "Hello! I'm your farming assistant. How can I help you today?"),
+                    sender: 'ai'
+                }]);
             }
         };
-        loadHistory();
+        initializeChat();
     }, []);
 
     // Scroll to bottom on new messages
@@ -98,7 +121,21 @@ const ChatAssistant = () => {
         const recognition = new SpeechRecognition();
         recognition.continuous = false;
         recognition.interimResults = false;
-        recognition.lang = i18n.language === 'en' ? 'en-IN' : (i18n.language === 'hi' ? 'hi-IN' : 'en-IN');
+
+        // Map app language to BCP 47 tags for speech recognition
+        const langMap: Record<string, string> = {
+            'en': 'en-IN',
+            'hi': 'hi-IN',
+            'te': 'te-IN',
+            'mr': 'mr-IN',
+            'kn': 'kn-IN',
+            'ta': 'ta-IN',
+            'pa': 'pa-IN',
+            'ml': 'ml-IN',
+            'gu': 'gu-IN',
+            'bn': 'bn-IN'
+        };
+        recognition.lang = langMap[i18n.language] || 'en-IN';
 
         recognition.onstart = () => setIsListening(true);
         recognition.onresult = (event: any) => {
@@ -120,8 +157,19 @@ const ChatAssistant = () => {
         setIsListening(false);
     };
 
+    const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setSelectedImage(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSend = async () => {
-        if (!inputValue.trim() || isLoading) return;
+        if ((!inputValue.trim() && !selectedImage) || isLoading) return;
 
         const userMsg: Message = {
             id: Date.now(),
@@ -131,6 +179,8 @@ const ChatAssistant = () => {
 
         setMessages(prev => [...prev, userMsg]);
         setInputValue("");
+        const imageToSend = selectedImage;
+        setSelectedImage(null); // Clear image immediately
         setIsLoading(true);
 
         try {
@@ -139,7 +189,7 @@ const ChatAssistant = () => {
             if (!farmerIdStr) {
                 throw new Error("No farmer ID found. Please complete profile.");
             }
-            const data = await chatService.sendMessage(userMsg.text, parseInt(farmerIdStr));
+            const data = await chatService.sendMessage(userMsg.text, parseInt(farmerIdStr), imageToSend || undefined, i18n.language);
 
             const aiMsg: Message = {
                 id: Date.now() + 1,
@@ -170,7 +220,7 @@ const ChatAssistant = () => {
     return (
         <MobileContainer className="bg-gray-50 flex flex-col h-full">
             {/* Header */}
-            <header className="bg-white px-4 py-3 flex items-center justify-between shadow-sm flex-shrink-0">
+            <header className="bg-white px-4 py-3 flex items-center justify-between shadow-sm flex-shrink-0 sticky top-0 z-50">
                 <button
                     onClick={() => navigate(-1)}
                     className="p-2 hover:bg-gray-100 rounded-full"
@@ -294,43 +344,68 @@ const ChatAssistant = () => {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 bg-white border-t border-gray-100 flex items-center gap-3 flex-shrink-0 mb-4 md:mb-0">
-                {/* Camera Button */}
-                <button className="w-12 h-12 rounded-full bg-[#22C522] flex items-center justify-center text-black shadow-lg shadow-green-500/20 active:scale-95 transition-transform">
-                    <Camera className="w-6 h-6 fill-black" />
-                </button>
+            <div className="p-4 bg-white border-t border-gray-100 flex flex-col gap-3 flex-shrink-0 mb-4 md:mb-0">
+                {/* Image Preview */}
+                {selectedImage && (
+                    <div className="relative w-fit bg-gray-100 rounded-lg p-2 border border-gray-200">
+                        <img src={selectedImage} alt="Preview" className="h-20 w-auto rounded-md object-cover" />
+                        <button
+                            onClick={() => setSelectedImage(null)}
+                            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-sm"
+                        >
+                            <X className="w-4 h-4" />
+                        </button>
+                    </div>
+                )}
 
-                {/* Text Input */}
-                <div className={`flex-1 ${isListening ? 'bg-green-100' : 'bg-gray-100'} rounded-full h-12 flex items-center px-4 relative transition-colors`}>
+                <div className="flex items-center gap-3 w-full">
+                    {/* Camera Button */}
                     <input
-                        type="text"
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
-                        placeholder={isListening ? "Listening..." : "Type or use voice..."}
-                        className="bg-transparent w-full h-full outline-none text-gray-700 placeholder-gray-500 font-medium"
-                        onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                        type="file"
+                        ref={fileInputRef}
+                        className="hidden"
+                        accept="image/*"
+                        onChange={handleFileSelect}
                     />
                     <button
-                        onClick={isListening ? stopListening : startListening}
-                        className={`${isListening ? 'text-red-500 animate-pulse' : 'text-gray-400 hover:text-gray-600'}`}
+                        onClick={() => fileInputRef.current?.click()}
+                        className={`w-12 h-12 rounded-full flex items-center justify-center text-black shadow-lg bg-[#22C522] shadow-green-500/20 active:scale-95 transition-transform`}
                     >
-                        {isListening ? <Square className="w-5 h-5 fill-current" /> : <Mic className="w-5 h-5" />}
+                        <Camera className="w-6 h-6 fill-black" />
                     </button>
-                    {isListening && (
-                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg">
-                            ACTIVE
-                        </div>
-                    )}
-                </div>
 
-                {/* Send Button */}
-                <button
-                    onClick={handleSend}
-                    disabled={isLoading || !inputValue.trim()}
-                    className="w-12 h-12 rounded-full bg-[#1a1c1a] flex items-center justify-center text-white shadow-lg active:scale-95 transition-transform disabled:opacity-50"
-                >
-                    <Send className="w-5 h-5 ml-0.5" />
-                </button>
+                    {/* Text Input */}
+                    <div className={`flex-1 ${isListening ? 'bg-green-100' : 'bg-gray-100'} rounded-full h-12 flex items-center px-4 relative transition-colors`}>
+                        <input
+                            type="text"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            placeholder={isListening ? "Listening..." : "Type or use voice..."}
+                            className="bg-transparent w-full h-full outline-none text-gray-700 placeholder-gray-500 font-medium"
+                            onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                        />
+                        <button
+                            onClick={isListening ? stopListening : startListening}
+                            className={`${isListening ? 'text-red-500 animate-pulse' : 'text-gray-400 hover:text-gray-600'}`}
+                        >
+                            {isListening ? <Square className="w-5 h-5 fill-current" /> : <Mic className="w-5 h-5" />}
+                        </button>
+                        {isListening && (
+                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg">
+                                ACTIVE
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Send Button */}
+                    <button
+                        onClick={handleSend}
+                        disabled={isLoading || (!inputValue.trim() && !selectedImage)}
+                        className="w-12 h-12 rounded-full bg-[#1a1c1a] flex items-center justify-center text-white shadow-lg active:scale-95 transition-transform disabled:opacity-50"
+                    >
+                        <Send className="w-5 h-5 ml-0.5" />
+                    </button>
+                </div>
             </div>
             <div ref={messagesEndRef} />
         </MobileContainer>

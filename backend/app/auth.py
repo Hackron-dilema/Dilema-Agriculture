@@ -60,23 +60,26 @@ _otp_store: dict[str, tuple[str, datetime]] = {}
 
 def generate_otp(phone: str) -> str:
     """Generate and store OTP for phone number."""
-    # For development, use fixed OTP "123456"
-    if os.getenv("ENVIRONMENT", "development") == "development":
+    # Special test number for reviewers/demo
+    if phone == "+919876543210":
         otp = "123456"
     else:
+        # Generate random 6-digit OTP
         otp = "".join([str(secrets.randbelow(10)) for _ in range(6)])
     
     # Store with expiry (5 minutes)
     _otp_store[phone] = (otp, datetime.utcnow() + timedelta(minutes=5))
+    
+    # LOGGING OTP FOR SIMULATION (Replacing SMS Gateway)
+    print(f"\n[OTP SERVICE] ===================================")
+    print(f"[OTP SERVICE] OTP for {phone}: {otp}")
+    print(f"[OTP SERVICE] ===================================\n")
+    
     return otp
 
 
 def verify_otp(phone: str, otp: str) -> bool:
     """Verify OTP for phone number."""
-    # Development mode - accept "123456"
-    if os.getenv("ENVIRONMENT", "development") == "development" and otp == "123456":
-        return True
-    
     stored = _otp_store.get(phone)
     if not stored:
         return False

@@ -42,15 +42,20 @@ const Dashboard = () => {
     const [farmerLocation, setFarmerLocation] = useState('');
 
     useEffect(() => {
+        // Check if user has completed onboarding
+        const farmerId = localStorage.getItem('farmerId');
+        if (!farmerId) {
+            // User hasn't completed onboarding, redirect
+            navigate('/farm-info');
+            return;
+        }
+
         // Load farmer name from storage or fetch
         const name = localStorage.getItem('farmerName') || 'Farmer';
         setFarmerName(name);
 
         const fetchData = async () => {
             try {
-                const farmerId = localStorage.getItem('farmerId');
-                if (!farmerId) return;
-
                 const id = parseInt(farmerId);
 
                 // Parallel fetch for speed

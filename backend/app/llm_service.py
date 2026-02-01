@@ -121,6 +121,94 @@ JSON response:"""
             # Fallback to keyword matching
             return self._fallback_intent_extraction(query)
     
+    async def extract_crop_info(self, message: str, language: str = "en") -> dict:
+        """
+        Extract crop information from a conversational message.
+        Used to collect crop data when farmer doesn't have crops registered.
+        
+        Args:
+            message: User's message describing their crop situation
+            language: Language code
+            
+        Returns:
+            Dict with extracted crop info (crop_type, sowing_date, problem, is_planning)
+        """
+        prompt = f"""You are an agricultural assistant. A farmer is telling you about their farm/crop situation.
+Extract the following information from their message:
+
+Farmer's message: "{message}"
+
+Respond ONLY with valid JSON in this exact format:
+{{
+    "crop_type": "<crop name like rice, wheat, corn, cotton, maize, sugarcane, or null if not mentioned>",
+    "sowing_date": "<date in YYYY-MM-DD format if mentioned, or 'recent' if they say just planted, or null>",
+    "problem": "<describe any problem/issue mentioned, or null>",
+    "is_planning": <true if they haven't planted yet and are planning, false otherwise>,
+    "days_since_sowing": <number of days if mentioned like '2 weeks ago' = 14, or null>,
+    "understood": <true if you understood the message, false if unclear>
+}}
+
+Examples:
+- "I'm growing corn, planted 2 weeks ago" → crop_type: "corn", days_since_sowing: 14
+- "Rice, no rain should I plant?" → crop_type: "rice", is_planning: true
+- "Corn, I didnt plant it, no rain should i plan" → crop_type: "corn", is_planning: true, problem: "no rain"
+- "My wheat has yellow leaves" → crop_type: "wheat", problem: "yellow leaves"
+
+JSON response:"""
+
+        try:
+            response = await self._call_llm(prompt)
+            json_str = self._extract_json(response)
+            data = json.loads(json_str)
+            return data
+        except Exception as e:
+            print(f"LLM crop extraction failed: {e}")
+            # Fallback to keyword extraction
+            return self._fallback_crop_extraction(message)
+
+    async def analyze_image(self, image_base64: str) -> str:
+        """
+        Analyze an image using a vision model.
+        
+        Args:
+            image_base64: Base64 encoded image string
+            
+        Returns:
+            Description of the image (symptoms, crop type, etc.)
+        """
+        # Remove header like "data:image/jpeg;base64," if present
+        if "," in image_base64:
+            image_base64 = image_base64.split(",")[1]
+            
+        prompt = "Describe this agriculture image in detail. Identify the crop if possible, and any visible pests, diseases, or deficiencies. Be specific."
+        
+        # Check provider
+        if self.provider == "groq" and self.groq_api_key:
+             # Groq vision not yet implemented in this MVP service, fallback
+             return "Image analysis requires vision model (mock response: looks like corn with leaf blight)."
+        else:
+            # Use Ollama with llava
+            try:
+                async with httpx.AsyncClient(timeout=60.0) as client:
+                    response = await client.post(
+                        f"{self.ollama_url}/api/generate",
+                        json={
+                            "model": "llava",  # improved vision model
+                            "prompt": prompt,
+                            "images": [image_base64],
+                            "stream": False
+                        }
+                    )
+                    if response.status_code == 200:
+                        data = response.json()
+                        return data.get("response", "Could not analyze image.")
+                    elif response.status_code == 404:
+                         return "Vision model (llava) not found on server."
+                    else:
+                         return f"Error analyzing image: {response.status_code}"
+            except Exception as e:
+                return f"Image analysis failed: {e}"
+    
     async def generate_response(
         self,
         decision_data: dict,
@@ -350,6 +438,40 @@ Translation in {lang_name}:"""
             confidence=0.6,
             language_detected=lang
         )
+    
+    def _fallback_crop_extraction(self, message: str) -> dict:
+        """Fallback keyword-based crop extraction when LLM fails."""
+        message_lower = message.lower()
+        
+        # Common crop names
+        crops = ["rice", "wheat", "corn", "maize", "cotton", "sugarcane", "soybean", 
+                 "groundnut", "potato", "tomato", "onion", "chilli", "mustard"]
+        
+        detected_crop = None
+        for crop in crops:
+            if crop in message_lower:
+                detected_crop = crop
+                break
+        
+        # Check if planning vs already planted
+        is_planning = any(w in message_lower for w in ["plan", "should i", "going to", "want to", "thinking"])
+        
+        # Check for problems
+        problem = None
+        problem_keywords = ["yellow", "spots", "pest", "disease", "dying", "wilt", "not growing", "no rain", "drought"]
+        for kw in problem_keywords:
+            if kw in message_lower:
+                problem = kw
+                break
+        
+        return {
+            "crop_type": detected_crop,
+            "sowing_date": None,
+            "problem": problem,
+            "is_planning": is_planning,
+            "days_since_sowing": None,
+            "understood": detected_crop is not None
+        }
     
     def _fallback_response(self, decision_data: dict, farmer_name: str) -> str:
         """Fallback response when LLM fails."""

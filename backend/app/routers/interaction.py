@@ -71,7 +71,9 @@ async def process_chat_message(
         farm=farm,
         crops=crops,
         query=message.content,
-        db=db
+        db=db,
+        image=message.image,
+        language_override=message.language
     )
     
     # Store assistant response
@@ -109,9 +111,10 @@ async def websocket_chat(
             # Create chat message
             message = ChatMessage(
                 content=message_data.get("content", ""),
-                farmer_id=farmer_id
-            )
-            
+                farmer_id=farmer_id,
+                image=message_data.get("image"),
+                language=message_data.get("language")
+            )          
             # Process through orchestrator
             # Get farmer context
             result = await db.execute(
@@ -156,9 +159,10 @@ async def websocket_chat(
                 farm=farm,
                 crops=crops,
                 query=message.content,
-                db=db
-            )
-            
+                db=db,
+                image=message.image,
+                language_override=message.language
+            )      
             # Store assistant response
             assistant_msg = ChatMessageDB(
                 farmer_id=farmer.id,

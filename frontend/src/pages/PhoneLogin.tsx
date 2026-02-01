@@ -26,7 +26,12 @@ const PhoneLogin = () => {
             const response = await authService.requestOtp(phone);
             if (response.success) {
                 localStorage.setItem('phone', `+91${phone}`);
-                navigate('/otp-verification', { state: { phone } });
+                navigate('/otp-verification', {
+                    state: {
+                        phone,
+                        fakeOtp: response.dev_otp // Pass the real generated OTP
+                    }
+                });
             } else {
                 setError(response.message || 'Failed to send OTP');
             }
